@@ -336,12 +336,13 @@ h1 {
 .mock-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
 .mock-cards div { height: 74px; border-radius: 12px; background: rgba(255, 255, 255, 0.05); border: 1px solid var(--border); }
 
-.code-card {
+.chat-card {
   position: absolute;
   left: -24px;
   bottom: 18px;
-  padding: 18px 22px;
-  border-radius: 14px;
+  width: 290px;
+  padding: 16px;
+  border-radius: 16px;
   border: 1px solid var(--border-strong);
   background: rgba(10, 14, 28, 0.92);
   backdrop-filter: blur(10px);
@@ -349,18 +350,45 @@ h1 {
   animation: float 8s ease-in-out infinite 1s;
 }
 
-.code-card pre { margin: 0; }
-
-.code-card code {
-  font-family: "JetBrains Mono", monospace;
-  font-size: 0.8rem;
-  line-height: 1.7;
-  color: #c7d2fe;
+.chat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
-.c-k { color: #c084fc; }
-.c-s { color: #67e8f9; }
-.c-ok { color: var(--green); }
+.chat-head strong { display: block; font-size: 0.88rem; line-height: 1.2; }
+.chat-head small { color: var(--green); font-size: 0.75rem; }
+
+.chat-avatar {
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--gradient);
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.bubble {
+  margin: 0 0 8px;
+  padding: 9px 13px;
+  max-width: 88%;
+  border-radius: 14px;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.bubble.in { background: rgba(255, 255, 255, 0.08); border-bottom-left-radius: 4px; }
+
+.bubble.out {
+  margin: 0 0 0 auto;
+  background: linear-gradient(120deg, #15803d, #16a34a);
+  border-bottom-right-radius: 4px;
+}
 
 .phone {
   position: absolute;
@@ -793,8 +821,7 @@ h2 {
   .window { width: 100%; }
   .phone { width: 130px; height: 260px; top: 120px; right: -6px; border-radius: 26px; }
   .phone-chart { height: 80px; }
-  .code-card { left: 0; bottom: 0; padding: 14px 16px; }
-  .code-card code { font-size: 0.7rem; }
+  .chat-card { left: 0; bottom: 0; width: 250px; padding: 14px; }
   .chip-1 { right: 0; top: -14px; }
   .chip-2 { display: none; }
   .steps { grid-template-columns: 1fr; }
