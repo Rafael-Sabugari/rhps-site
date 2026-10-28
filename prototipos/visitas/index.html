@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Visitas de Campo | Protótipo RHPS Systems</title>
+  <meta name="description" content="Protótipo da RHPS Systems: aplicativo de visitas de campo para equipes de vendas externas.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1f5130">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../demo-bar.css">
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: "Plus Jakarta Sans", system-ui, sans-serif; background: #10170f; min-height: 100vh; display: grid; place-items: center; }
+
+    /* No computador o app aparece dentro de um celular */
+    .device { width: 390px; height: 820px; border-radius: 48px; overflow: hidden; background: #f4f3ee; box-shadow: 0 0 0 12px #1d2a1b, 0 0 0 13px #2c3b29, 0 40px 90px -20px rgba(74, 160, 96, 0.45); }
+    .device iframe { width: 100%; height: 100%; border: 0; display: block; }
+    .side { position: fixed; left: calc(50% + 260px); top: 50%; transform: translateY(-50%); color: #e8efe4; max-width: 300px; }
+    .side h1 { font-size: 2rem; margin: 0 0 10px; line-height: 1.1; }
+    .side p { color: #a9b8a4; }
+    .side-left { left: auto; right: calc(50% + 260px); text-align: right; }
+    .side-left ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
+    @media (max-width: 1100px) { .side { display: none; } }
+    @media (max-width: 480px) {
+      body { display: block; }
+      .device { width: 100%; height: 100dvh; border-radius: 0; box-shadow: none; }
+      .rhps-bar { bottom: 76px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="side side-left">
+    <h1>App para equipe de campo</h1>
+    <ul><li>📍 Check-in com localização</li><li>🗺️ Mapa e rota do dia</li><li>📶 Funciona sem internet</li><li>📊 Painel para o gerente</li></ul>
+  </div>
+
+  <div class="device">
+    <iframe src="app.html" title="Protótipo do aplicativo Visitas de Campo"></iframe>
+  </div>
+
+  <div class="side">
+    <h1>Visitas de Campo</h1>
+    <p>Protótipo de aplicativo para vendedores externos e técnicos: carteira de clientes, check-in nas visitas, rota do dia e relatório para o gerente. Preencha seu nome, marque os clientes de exemplo e teste à vontade.</p>
+  </div>
+
+  <script src="../demo-bar.js" data-kind="um aplicativo como o Visitas de Campo"></script>
+</body>
+</html>

@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Fluxo CRM | Demonstração RHPS Systems</title>
-  <meta name="description" content="Projeto de demonstração da RHPS Systems: sistema CRM com funil de vendas, contatos e tarefas.">
+  <title>Fluxo CRM | Protótipo RHPS Systems</title>
+  <meta name="description" content="Protótipo da RHPS Systems: sistema CRM com funil de vendas, contatos e tarefas.">
   <meta name="robots" content="noindex">
   <meta name="theme-color" content="#0f172a">
   <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
@@ -234,7 +234,7 @@
     ].map(([t, when], i) => ({ id: i, t, when, done: i === 4 }));
 
     // Os dados ficam salvos no navegador de quem testa a demo
-    const KEY = 'fluxo-crm-demo-v1';
+    const KEY = 'fluxo-crm-prototipo-v1';
     let db;
     try { db = JSON.parse(localStorage.getItem(KEY)); } catch (e) { db = null; }
     if (!db || new URLSearchParams(location.search).has('limpo')) db = { deals: SEED, tasks: TASKS_SEED, feed: [] };
