@@ -1107,3 +1107,59 @@ h2 {
   .prices { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .price-featured { margin-top: 8px; }
 }
+
+/* Portfólio de demonstrações */
+.demos {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
+
+.demo {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  overflow: hidden;
+  text-decoration: none;
+  transition: transform 0.25s, border-color 0.25s, box-shadow 0.25s;
+}
+
+.demo:hover {
+  transform: translateY(-6px);
+  border-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  box-shadow: 0 24px 50px -24px color-mix(in srgb, var(--accent) 70%, transparent);
+}
+
+.demo-shot {
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: color-mix(in srgb, var(--accent) 12%, var(--bg-soft));
+  border-bottom: 1px solid var(--border);
+}
+
+.demo-shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+  transition: transform 0.5s;
+}
+
+.demo:hover .demo-shot img { transform: scale(1.04); }
+
+.demo-body { padding: 24px 26px 28px; display: flex; flex-direction: column; flex: 1; }
+.demo-body .slide-tag { align-self: flex-start; }
+.demo h3 { margin: 0 0 8px; font-size: 1.25rem; }
+.demo p { margin: 0 0 18px; color: var(--muted); font-size: 0.97rem; }
+
+.demo-link {
+  margin-top: auto;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--accent) 75%, #fff);
+}
+
+@media (max-width: 1000px) {
+  .demos { grid-template-columns: 1fr; max-width: 560px; }
+}

@@ -1,0 +1,40 @@
+/* Faixa fixa que identifica as demonstrações da RHPS Systems */
+.rhps-bar {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  z-index: 9999;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  max-width: calc(100vw - 24px);
+  padding: 8px 8px 8px 14px;
+  border-radius: 999px;
+  background: rgba(7, 11, 22, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 18px 40px -14px rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font: 500 13px/1.3 "Inter", system-ui, sans-serif;
+  color: #eef2ff;
+}
+.rhps-bar a { color: inherit; text-decoration: none; }
+.rhps-bar-brand { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+.rhps-bar-brand img { width: 22px; height: 22px; }
+.rhps-bar-brand small { color: #94a3c4; font-size: 12px; }
+.rhps-bar-cta {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: #22c55e;
+  color: #04220f !important;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.rhps-bar-cta:hover { background: #2fd96b; }
+@media (max-width: 520px) {
+  .rhps-bar { gap: 8px; font-size: 12px; padding-left: 10px; }
+  .rhps-bar-brand small { display: none; }
+  .rhps-bar-cta { padding: 7px 12px; }
+}
