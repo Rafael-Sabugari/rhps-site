@@ -1,0 +1,330 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Barbearia Navalha | Protótipo RHPS Systems</title>
+  <meta name="description" content="Protótipo da RHPS Systems: site de barbearia com agendamento online.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#14110f">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../demo-bar.css">
+  <style>
+    :root {
+      --bg: #14110f;
+      --bg-2: #1c1815;
+      --card: #231e1a;
+      --line: rgba(255, 236, 210, 0.1);
+      --text: #f6efe6;
+      --muted: #b6a897;
+      --gold: #d4a24c;
+      --gold-2: #f1c878;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: "Bebas Neue", Impact, sans-serif; font-weight: 400; letter-spacing: 0.02em; line-height: 1; margin: 0; }
+
+    header { position: sticky; top: 0; z-index: 20; background: rgba(20, 17, 15, 0.85); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: "Bebas Neue"; font-size: 1.7rem; letter-spacing: 0.06em; }
+    .logo svg { width: 30px; height: 30px; color: var(--gold); }
+    .links { display: flex; gap: 28px; font-size: 0.95rem; color: var(--muted); }
+    .links a:hover { color: var(--text); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 13px 24px; border-radius: 999px; background: linear-gradient(120deg, var(--gold), var(--gold-2)); color: #1a1208; font-weight: 700; border: 0; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px rgba(212, 162, 76, 0.8); }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+
+    .hero { position: relative; overflow: hidden; padding: 110px 0 120px; }
+    .hero::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(600px 400px at 80% 30%, rgba(212, 162, 76, 0.22), transparent 70%),
+      repeating-linear-gradient(135deg, rgba(255,255,255,0.025) 0 2px, transparent 2px 18px); }
+    .hero .wrap { position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 50px; align-items: center; }
+    .eyebrow { color: var(--gold); font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; font-size: 0.8rem; }
+    .hero h1 { font-size: clamp(3.4rem, 8vw, 6.4rem); margin: 14px 0 18px; }
+    .hero h1 span { color: var(--gold); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 480px; margin: 0 0 30px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stats { display: flex; gap: 34px; margin-top: 40px; }
+    .stats strong { display: block; font-family: "Bebas Neue"; font-size: 2.3rem; color: var(--text); }
+    .stats span { color: var(--muted); font-size: 0.85rem; }
+
+    .pole { position: relative; aspect-ratio: 3 / 4; border-radius: 26px; background: linear-gradient(160deg, #2b231d, #17130f); border: 1px solid var(--line); display: grid; place-items: center; overflow: hidden; }
+    .pole::after { content: ""; position: absolute; width: 80px; height: 78%; border-radius: 40px; background: repeating-linear-gradient(-45deg, #b91c1c 0 18px, #f6efe6 18px 36px, #1d4ed8 36px 54px, #f6efe6 54px 72px); background-size: 100% 204px; animation: spin 3s linear infinite; box-shadow: inset -12px 0 20px rgba(0,0,0,0.35), 0 0 60px rgba(212,162,76,0.25); }
+    @keyframes spin { to { background-position: 0 204px; } }
+    .pole .tag { position: absolute; z-index: 2; bottom: 22px; left: 22px; right: 22px; background: rgba(20,17,15,0.85); border: 1px solid var(--line); border-radius: 16px; padding: 14px 16px; display: flex; gap: 12px; align-items: center; backdrop-filter: blur(6px); }
+    .tag .dot { width: 10px; height: 10px; border-radius: 50%; background: #22c55e; box-shadow: 0 0 0 5px rgba(34,197,94,0.2); }
+    .tag small { display: block; color: var(--muted); font-size: 0.78rem; }
+
+    section { padding: 90px 0; }
+    .head { text-align: center; margin-bottom: 46px; }
+    .head h2 { font-size: clamp(2.6rem, 5vw, 3.6rem); margin-top: 8px; }
+
+    .services { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .svc { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 26px; transition: border-color 0.2s, transform 0.2s; }
+    .svc:hover { border-color: rgba(212,162,76,0.5); transform: translateY(-4px); }
+    .svc .ic { font-size: 1.8rem; }
+    .svc h3 { font-size: 1.8rem; margin: 14px 0 6px; }
+    .svc p { color: var(--muted); margin: 0 0 16px; font-size: 0.95rem; }
+    .svc .row { display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--line); padding-top: 14px; }
+    .svc .price { font-family: "Bebas Neue"; font-size: 1.9rem; color: var(--gold); }
+    .svc .time { color: var(--muted); font-size: 0.85rem; }
+
+    .booking { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .book { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 26px; }
+    .panel h3 { font-size: 1.5rem; margin-bottom: 14px; color: var(--gold); }
+    .step-label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 18px 0 10px; }
+    .step-label:first-of-type { margin-top: 0; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip { padding: 9px 14px; border-radius: 12px; border: 1px solid var(--line); background: transparent; color: var(--text); cursor: pointer; font: inherit; font-size: 0.9rem; transition: all 0.15s; }
+    .chip:hover { border-color: rgba(212,162,76,0.5); }
+    .chip.on { background: var(--gold); color: #1a1208; border-color: var(--gold); font-weight: 600; }
+    .chip:disabled { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+    .barbers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .barber { border: 1px solid var(--line); border-radius: 16px; padding: 14px 10px; text-align: center; cursor: pointer; background: transparent; color: var(--text); font: inherit; transition: all 0.15s; }
+    .barber .av { width: 52px; height: 52px; margin: 0 auto 8px; border-radius: 50%; display: grid; place-items: center; font-family: "Bebas Neue"; font-size: 1.5rem; color: #1a1208; }
+    .barber small { display: block; color: var(--muted); font-size: 0.75rem; }
+    .barber.on { border-color: var(--gold); background: rgba(212,162,76,0.08); }
+    .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .day { padding: 8px 0; border-radius: 12px; border: 1px solid var(--line); text-align: center; cursor: pointer; background: transparent; color: var(--text); font: inherit; }
+    .day small { display: block; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+    .day b { font-size: 1.1rem; }
+    .day.on { background: var(--gold); color: #1a1208; border-color: var(--gold); }
+    .day.on small { color: #3a2a10; }
+    .summary { display: grid; gap: 12px; margin-bottom: 22px; }
+    .summary div { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--line); padding-bottom: 10px; color: var(--muted); }
+    .summary b { color: var(--text); }
+    .total { font-family: "Bebas Neue"; font-size: 2.4rem; color: var(--gold); }
+    .confirm { width: 100%; justify-content: center; padding: 16px; font-size: 1rem; }
+    .confirm:disabled { opacity: 0.4; cursor: not-allowed; transform: none; box-shadow: none; }
+    .done { display: none; text-align: center; padding: 20px 0; }
+    .done.show { display: block; animation: pop 0.4s ease; }
+    .done .check { width: 74px; height: 74px; border-radius: 50%; margin: 0 auto 14px; background: #22c55e; display: grid; place-items: center; font-size: 2.2rem; color: #fff; }
+    @keyframes pop { from { transform: scale(0.85); opacity: 0; } }
+
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .rev { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; }
+    .rev .stars { color: var(--gold); letter-spacing: 3px; }
+    .rev p { color: var(--muted); }
+    .rev b { font-size: 0.9rem; }
+
+    .info { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .map { min-height: 260px; border-radius: 22px; border: 1px solid var(--line); background:
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 40px 40px,
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px) 0 0 / 40px 40px, #1a1613; position: relative; }
+    .map::before { content: ""; position: absolute; left: 10%; right: 10%; top: 55%; height: 14px; background: rgba(255,255,255,0.07); transform: rotate(-8deg); }
+    .map .pin { position: absolute; left: 50%; top: 45%; transform: translate(-50%, -100%); font-size: 2.6rem; filter: drop-shadow(0 8px 10px rgba(0,0,0,0.5)); animation: bob 2s ease-in-out infinite; }
+    @keyframes bob { 50% { transform: translate(-50%, -115%); } }
+    .hours div { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px dashed var(--line); color: var(--muted); }
+    .hours b { color: var(--text); }
+    footer { padding: 34px 0 110px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+    @media (max-width: 860px) {
+      .links { display: none; }
+      .hero { padding: 60px 0 70px; }
+      .hero .wrap, .book, .info { grid-template-columns: 1fr; }
+      .pole { max-width: 360px; width: 100%; margin: 0 auto; aspect-ratio: 4 / 3; }
+      .services, .reviews { grid-template-columns: 1fr; }
+      .stats { gap: 22px; }
+      section { padding: 64px 0; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="logo">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M20 4 8.1 15.9M14.5 14.5 20 20M8.1 8.1 12 12"/></svg>
+        Navalha
+      </a>
+      <nav class="links"><a href="#servicos">Serviços</a><a href="#agendar">Agendar</a><a href="#avaliacoes">Avaliações</a><a href="#local">Onde estamos</a></nav>
+      <a href="#agendar" class="btn">Agendar horário</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Barbearia desde 2012</span>
+        <h1>Seu estilo,<br><span>nosso ofício.</span></h1>
+        <p>Corte, barba e aquele cuidado que você merece. Agende em menos de 30 segundos, sem ligação e sem fila.</p>
+        <div class="hero-actions">
+          <a href="#agendar" class="btn">✂️ Agendar agora</a>
+          <a href="#servicos" class="btn ghost">Ver preços</a>
+        </div>
+        <div class="stats">
+          <div><strong>4.9★</strong><span>no Google</span></div>
+          <div><strong>12 mil+</strong><span>cortes feitos</span></div>
+          <div><strong>3</strong><span>barbeiros</span></div>
+        </div>
+      </div>
+      <div class="pole" aria-hidden="true">
+        <div class="tag"><span class="dot"></span><div><b>Aberto agora</b><small>Próximo horário livre: 14:30</small></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Serviços</span><h2>Escolha o seu</h2></div>
+      <div class="services" id="services"></div>
+    </div>
+  </section>
+
+  <section id="agendar" class="booking">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Agendamento online</span><h2>Marque seu horário</h2></div>
+      <div class="book">
+        <div class="panel">
+          <p class="step-label">1. Serviço</p>
+          <div class="chips" id="svcChips"></div>
+          <p class="step-label">2. Barbeiro</p>
+          <div class="barbers" id="barbers"></div>
+          <p class="step-label">3. Dia</p>
+          <div class="days" id="days"></div>
+          <p class="step-label">4. Horário</p>
+          <div class="chips" id="times"></div>
+        </div>
+        <div class="panel">
+          <div id="resume">
+            <h3>Resumo</h3>
+            <div class="summary">
+              <div>Serviço <b id="rSvc">—</b></div>
+              <div>Barbeiro <b id="rBarber">—</b></div>
+              <div>Data <b id="rDay">—</b></div>
+              <div>Horário <b id="rTime">—</b></div>
+            </div>
+            <p style="margin:0;color:var(--muted)">Total</p>
+            <p class="total" id="rTotal" style="margin:0 0 20px">R$ 0</p>
+            <button class="btn confirm" id="confirm" disabled>Confirmar agendamento</button>
+          </div>
+          <div class="done" id="done">
+            <div class="check">✓</div>
+            <h3 style="color:var(--text);font-size:2rem">Horário confirmado!</h3>
+            <p style="color:var(--muted)" id="doneText"></p>
+            <p style="color:var(--muted);font-size:0.85rem">Você vai receber um lembrete no WhatsApp 1 hora antes.</p>
+            <button class="btn ghost" id="again">Fazer outro agendamento</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="avaliacoes">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Avaliações</span><h2>Quem corta, volta</h2></div>
+      <div class="reviews">
+        <div class="rev"><div class="stars">★★★★★</div><p>“Melhor degradê da cidade. Agendei pelo site em segundos e fui atendido na hora marcada.”</p><b>Lucas M.</b></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>“Ambiente top, café e cerveja gelada. O lembrete no WhatsApp salvou meu esquecimento.”</p><b>Rafael S.</b></div>
+        <div class="rev"><div class="stars">★★★★★</div><p>“Barba feita com toalha quente é outro nível. Preço justo e atendimento nota 10.”</p><b>Diego A.</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="local" class="booking">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Onde estamos</span><h2>Venha nos visitar</h2></div>
+      <div class="info">
+        <div class="map" aria-hidden="true"><span class="pin">📍</span></div>
+        <div class="panel hours">
+          <h3>Horários</h3>
+          <div>Segunda a sexta <b>09:00 – 20:00</b></div>
+          <div>Sábado <b>08:00 – 18:00</b></div>
+          <div>Domingo <b>Fechado</b></div>
+          <p style="color:var(--muted);margin-top:18px">Rua das Tesouras, 123 · Centro</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Barbearia Navalha é um negócio fictício, criado como protótipo.</footer>
+
+  <script src="../demo-bar.js" data-kind="um site como este"></script>
+  <script>
+    const SERVICES = [
+      { id: 'corte', ic: '✂️', name: 'Corte', desc: 'Máquina e tesoura, finalizado com pomada.', price: 45, min: 40 },
+      { id: 'barba', ic: '🪒', name: 'Barba', desc: 'Toalha quente, navalha e hidratação.', price: 35, min: 30 },
+      { id: 'combo', ic: '🔥', name: 'Corte + Barba', desc: 'O combo completo com desconto.', price: 70, min: 70 },
+      { id: 'pigmento', ic: '🎨', name: 'Pigmentação', desc: 'Disfarça falhas e realça o corte.', price: 30, min: 20 },
+      { id: 'sobrancelha', ic: '👁️', name: 'Sobrancelha', desc: 'Alinhamento na navalha.', price: 15, min: 10 },
+      { id: 'infantil', ic: '🧒', name: 'Corte infantil', desc: 'Até 12 anos, com muita paciência.', price: 35, min: 30 },
+    ];
+    const BARBERS = [
+      { name: 'Caio', role: 'Degradê', color: '#d4a24c' },
+      { name: 'Bruno', role: 'Barba', color: '#e07a5f' },
+      { name: 'Téo', role: 'Clássico', color: '#81b29a' },
+    ];
+    const TIMES = ['09:00', '10:00', '11:00', '13:30', '14:30', '15:30', '16:30', '17:30', '18:30'];
+    const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const state = { svc: null, barber: null, day: null, time: null };
+    const $ = (id) => document.getElementById(id);
+
+    $('services').innerHTML = SERVICES.map((s) => `
+      <article class="svc"><div class="ic">${s.ic}</div><h3>${s.name}</h3><p>${s.desc}</p>
+      <div class="row"><span class="price">${brl(s.price)}</span><span class="time">⏱ ${s.min} min</span></div></article>`).join('');
+
+    $('svcChips').innerHTML = SERVICES.map((s) => `<button class="chip" data-svc="${s.id}">${s.name}</button>`).join('');
+    $('barbers').innerHTML = BARBERS.map((b, i) => `
+      <button class="barber" data-barber="${i}"><div class="av" style="background:${b.color}">${b.name[0]}</div>${b.name}<small>${b.role}</small></button>`).join('');
+
+    const week = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+    const days = [];
+    for (let d = new Date(), n = 0; days.length < 7; n++) {
+      const dt = new Date(d.getFullYear(), d.getMonth(), d.getDate() + n);
+      if (dt.getDay() !== 0) days.push(dt);
+    }
+    $('days').innerHTML = days.map((d, i) => `<button class="day" data-day="${i}"><small>${week[d.getDay()]}</small><b>${d.getDate()}</b></button>`).join('');
+
+    // Horários ocupados variam de forma determinística por barbeiro e dia
+    const busy = (b, d, t) => ((b + 1) * 7 + (d + 2) * 3 + t * 5) % 4 === 0;
+    function renderTimes() {
+      $('times').innerHTML = TIMES.map((t, i) => {
+        const off = state.barber !== null && state.day !== null && busy(state.barber, state.day, i);
+        return `<button class="chip ${state.time === t ? 'on' : ''}" data-time="${t}" ${off ? 'disabled' : ''}>${t}</button>`;
+      }).join('');
+    }
+    function render() {
+      document.querySelectorAll('[data-svc]').forEach((el) => el.classList.toggle('on', el.dataset.svc === state.svc));
+      document.querySelectorAll('[data-barber]').forEach((el) => el.classList.toggle('on', Number(el.dataset.barber) === state.barber));
+      document.querySelectorAll('[data-day]').forEach((el) => el.classList.toggle('on', Number(el.dataset.day) === state.day));
+      renderTimes();
+      const svc = SERVICES.find((s) => s.id === state.svc);
+      const day = state.day !== null ? days[state.day] : null;
+      $('rSvc').textContent = svc ? svc.name : '—';
+      $('rBarber').textContent = state.barber !== null ? BARBERS[state.barber].name : '—';
+      $('rDay').textContent = day ? day.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' }) : '—';
+      $('rTime').textContent = state.time || '—';
+      $('rTotal').textContent = brl(svc ? svc.price : 0);
+      $('confirm').disabled = !(svc && state.barber !== null && day && state.time);
+    }
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('[data-svc],[data-barber],[data-day],[data-time]');
+      if (!t || t.disabled) return;
+      if (t.dataset.svc) state.svc = t.dataset.svc;
+      if (t.dataset.barber) { state.barber = Number(t.dataset.barber); state.time = null; }
+      if (t.dataset.day) { state.day = Number(t.dataset.day); state.time = null; }
+      if (t.dataset.time) state.time = t.dataset.time;
+      render();
+    });
+    $('confirm').addEventListener('click', () => {
+      const svc = SERVICES.find((s) => s.id === state.svc);
+      $('doneText').textContent = `${svc.name} com ${BARBERS[state.barber].name}, ${$('rDay').textContent} às ${state.time}.`;
+      $('resume').style.display = 'none';
+      $('done').classList.add('show');
+    });
+    $('again').addEventListener('click', () => {
+      Object.assign(state, { svc: null, barber: null, day: null, time: null });
+      $('done').classList.remove('show');
+      $('resume').style.display = '';
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>

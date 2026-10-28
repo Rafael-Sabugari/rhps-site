@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Brasa Burger | Protótipo RHPS Systems</title>
+  <meta name="description" content="Protótipo da RHPS Systems: aplicativo de cardápio e delivery.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#ff5a1f">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../demo-bar.css">
+  <style>
+    :root {
+      --orange: #ff5a1f;
+      --orange-2: #ff8a3d;
+      --ink: #1b1410;
+      --muted: #8a7d74;
+      --bg: #fff8f3;
+      --card: #ffffff;
+      --line: #f1e4da;
+    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+    body { margin: 0; font-family: "Plus Jakarta Sans", system-ui, sans-serif; color: var(--ink); background: #1b1410; min-height: 100vh; display: grid; place-items: center; }
+    button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
+
+    /* No computador o app aparece dentro de um celular */
+    .device { position: relative; width: 390px; height: 820px; border-radius: 48px; background: var(--bg); overflow: hidden; box-shadow: 0 0 0 12px #2a211c, 0 0 0 13px #3a2e27, 0 40px 90px -20px rgba(255, 90, 31, 0.45); }
+    .side { position: fixed; left: calc(50% + 260px); top: 50%; transform: translateY(-50%); color: #f6e9df; max-width: 300px; }
+    .side h1 { font-size: 2rem; margin: 0 0 10px; line-height: 1.1; }
+    .side p { color: #bfae9f; }
+    .side-left { left: auto; right: calc(50% + 260px); text-align: right; }
+    .side-left ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; color: #f6e9df; }
+    @media (max-width: 1100px) { .side { display: none; } }
+    @media (max-width: 480px) {
+      body { display: block; background: var(--bg); }
+      .device { width: 100%; height: 100dvh; border-radius: 0; box-shadow: none; }
+      .cartbar, .cta { bottom: 76px; }
+    }
+
+    .screen { position: absolute; inset: 0; overflow-y: auto; padding-bottom: 120px; transition: transform 0.35s cubic-bezier(.2,.8,.2,1), opacity 0.35s; scrollbar-width: none; }
+    .screen::-webkit-scrollbar { display: none; }
+    .screen.hidden { transform: translateX(100%); opacity: 0; pointer-events: none; }
+    .screen.behind { transform: translateX(-30%); opacity: 0; pointer-events: none; }
+
+    .top { padding: 54px 20px 18px; background: linear-gradient(160deg, var(--orange), var(--orange-2)); color: #fff; border-radius: 0 0 28px 28px; }
+    .top-row { display: flex; justify-content: space-between; align-items: center; }
+    .addr small { opacity: 0.85; font-size: 0.75rem; display: block; }
+    .addr b { font-size: 0.95rem; }
+    .round { width: 42px; height: 42px; border-radius: 14px; background: rgba(255,255,255,0.2); display: grid; place-items: center; font-size: 1.1rem; position: relative; }
+    .badge { position: absolute; top: -5px; right: -5px; min-width: 20px; height: 20px; border-radius: 10px; background: #1b1410; color: #fff; font-size: 0.7rem; font-weight: 700; display: grid; place-items: center; padding: 0 5px; transform: scale(0); transition: transform 0.2s; }
+    .badge.show { transform: scale(1); }
+    .badge.bump { animation: bump 0.35s; }
+    @keyframes bump { 50% { transform: scale(1.4); } }
+    .top h1 { margin: 20px 0 14px; font-size: 1.6rem; line-height: 1.15; }
+    .search { display: flex; align-items: center; gap: 10px; background: #fff; color: var(--muted); border-radius: 16px; padding: 13px 16px; font-size: 0.9rem; }
+    .search input { border: 0; outline: 0; font: inherit; flex: 1; color: var(--ink); background: transparent; }
+
+    .promo { margin: 20px; border-radius: 22px; padding: 20px; background: #1b1410; color: #fff; display: flex; align-items: center; justify-content: space-between; overflow: hidden; position: relative; }
+    .promo b { font-size: 1.15rem; display: block; }
+    .promo small { color: #d9c8bb; }
+    .promo .big { font-size: 3.4rem; transform: rotate(-12deg); }
+    .promo::after { content: ""; position: absolute; width: 160px; height: 160px; border-radius: 50%; right: -40px; top: -60px; background: radial-gradient(circle, rgba(255,90,31,0.6), transparent 70%); }
+
+    .cats { display: flex; gap: 10px; padding: 0 20px; overflow-x: auto; scrollbar-width: none; }
+    .cats::-webkit-scrollbar { display: none; }
+    .cat { flex: none; padding: 10px 16px; border-radius: 14px; background: var(--card); border: 1px solid var(--line); font-weight: 600; font-size: 0.88rem; transition: all 0.2s; }
+    .cat.on { background: var(--orange); color: #fff; border-color: var(--orange); }
+
+    h2 { font-size: 1.1rem; margin: 24px 20px 12px; }
+    .list { display: grid; gap: 12px; padding: 0 20px; }
+    .item { display: flex; gap: 14px; align-items: center; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 12px; animation: in 0.35s both; }
+    @keyframes in { from { opacity: 0; transform: translateY(10px); } }
+    .emoji { width: 74px; height: 74px; flex: none; border-radius: 16px; display: grid; place-items: center; font-size: 2.4rem; background: linear-gradient(145deg, #fff1e6, #ffe0cc); }
+    .item .info { flex: 1; min-width: 0; }
+    .item b { display: block; font-size: 0.95rem; }
+    .item small { color: var(--muted); font-size: 0.78rem; display: block; line-height: 1.35; margin: 2px 0 6px; }
+    .item .price { font-weight: 800; color: var(--orange); }
+    .add { width: 38px; height: 38px; border-radius: 12px; background: var(--orange); color: #fff; font-size: 1.3rem; font-weight: 700; flex: none; transition: transform 0.15s; }
+    .add:active { transform: scale(0.9); }
+
+    .cartbar { position: absolute; left: 16px; right: 16px; bottom: 20px; z-index: 5; display: flex; justify-content: space-between; align-items: center; background: var(--ink); color: #fff; border-radius: 20px; padding: 16px 20px; font-weight: 700; transform: translateY(140%); transition: transform 0.35s cubic-bezier(.2,.8,.2,1); }
+    .cartbar.show { transform: none; }
+    .cartbar span { color: var(--orange-2); }
+
+    .bar { display: flex; align-items: center; gap: 12px; padding: 54px 20px 10px; }
+    .bar .round { background: var(--card); border: 1px solid var(--line); }
+    .bar h1 { font-size: 1.25rem; margin: 0; }
+    .line { display: flex; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px dashed var(--line); }
+    .line .emoji { width: 54px; height: 54px; font-size: 1.7rem; border-radius: 14px; }
+    .qty { display: flex; align-items: center; gap: 10px; background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 4px; }
+    .qty button { width: 28px; height: 28px; border-radius: 9px; background: #fff1e6; color: var(--orange); font-weight: 800; }
+    .box { margin: 14px 20px; background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 16px; }
+    .box h3 { margin: 0 0 10px; font-size: 0.95rem; }
+    .row { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.9rem; margin: 6px 0; }
+    .row.total { color: var(--ink); font-weight: 800; font-size: 1.1rem; margin-top: 12px; }
+    .pay { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .pay button { border: 1.5px solid var(--line); border-radius: 14px; padding: 12px 6px; font-size: 0.82rem; font-weight: 600; background: #fff; }
+    .pay button.on { border-color: var(--orange); background: #fff1e6; color: var(--orange); }
+    .cta { position: absolute; left: 16px; right: 16px; bottom: 20px; padding: 17px; border-radius: 18px; background: var(--orange); color: #fff; font-weight: 800; font-size: 1rem; box-shadow: 0 14px 30px -10px rgba(255,90,31,0.7); }
+
+    .track-hero { margin: 10px 20px; border-radius: 24px; background: linear-gradient(160deg, var(--orange), var(--orange-2)); color: #fff; padding: 22px; text-align: center; }
+    .track-hero .big { font-size: 4rem; display: inline-block; animation: ride 1.2s ease-in-out infinite; }
+    @keyframes ride { 50% { transform: translateX(10px) rotate(-4deg); } }
+    .track-hero b { display: block; font-size: 1.3rem; }
+    .eta { display: inline-block; margin-top: 8px; background: rgba(255,255,255,0.22); padding: 6px 14px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; }
+    .steps { list-style: none; margin: 0; padding: 0; }
+    .steps li { display: flex; gap: 14px; position: relative; padding-bottom: 22px; color: var(--muted); transition: color 0.3s; }
+    .steps li::before { content: ""; position: absolute; left: 13px; top: 28px; bottom: 0; width: 2px; background: var(--line); }
+    .steps li:last-child::before { display: none; }
+    .steps .dot { width: 28px; height: 28px; flex: none; border-radius: 50%; border: 2px solid var(--line); background: #fff; display: grid; place-items: center; font-size: 0.8rem; transition: all 0.3s; }
+    .steps li.ok { color: var(--ink); }
+    .steps li.ok .dot { background: var(--orange); border-color: var(--orange); color: #fff; }
+    .steps li.now .dot { border-color: var(--orange); box-shadow: 0 0 0 6px rgba(255,90,31,0.18); }
+    .steps small { display: block; font-size: 0.78rem; color: var(--muted); }
+    .toast { position: absolute; top: 14px; left: 50%; transform: translate(-50%, -150%); background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 16px; font-size: 0.85rem; font-weight: 600; z-index: 10; transition: transform 0.35s; white-space: nowrap; }
+    .toast.show { transform: translate(-50%, 30px); }
+    .empty { text-align: center; color: var(--muted); padding: 40px 20px; }
+  </style>
+</head>
+<body>
+  <div class="side side-left">
+    <h1>App de delivery próprio</h1>
+    <ul><li>🍔 Cardápio digital</li><li>🛒 Carrinho e Pix</li><li>🛵 Acompanhamento do pedido</li><li>💸 Sem taxa por pedido</li></ul>
+  </div>
+
+  <div class="device">
+    <div class="toast" id="toast"></div>
+
+    <section class="screen" id="home">
+      <div class="top">
+        <div class="top-row">
+          <div class="addr"><small>Entregar em</small><b>Rua das Flores, 210 ▾</b></div>
+          <button class="round" id="openCart" aria-label="Carrinho">🛍️<span class="badge" id="badge">0</span></button>
+        </div>
+        <h1>Bateu a fome?<br>A gente resolve. 🔥</h1>
+        <label class="search">🔎 <input id="q" placeholder="Buscar no cardápio"></label>
+      </div>
+      <div class="promo"><div><b>Combo da semana</b><small>Burger + fritas + refri por R$ 39,90</small></div><span class="big">🍟</span></div>
+      <div class="cats" id="cats"></div>
+      <h2 id="listTitle">Mais pedidos</h2>
+      <div class="list" id="list"></div>
+      <button class="cartbar" id="cartbar"><span id="cbCount">0 itens</span> Ver sacola <b id="cbTotal">R$ 0</b></button>
+    </section>
+
+    <section class="screen hidden" id="cart">
+      <div class="bar"><button class="round" data-back="home" aria-label="Voltar">←</button><h1>Sua sacola</h1></div>
+      <div class="box"><div id="lines"></div></div>
+      <div class="box">
+        <h3>Pagamento</h3>
+        <div class="pay" id="pay">
+          <button class="on" data-pay="Pix">⚡ Pix</button><button data-pay="Cartão">💳 Cartão</button><button data-pay="Dinheiro">💵 Dinheiro</button>
+        </div>
+      </div>
+      <div class="box">
+        <div class="row"><span>Subtotal</span><span id="sub">R$ 0</span></div>
+        <div class="row"><span>Entrega</span><span>R$ 5,00</span></div>
+        <div class="row total"><span>Total</span><span id="tot">R$ 0</span></div>
+      </div>
+      <button class="cta" id="checkout">Fazer pedido</button>
+    </section>
+
+    <section class="screen hidden" id="track">
+      <div class="bar"><button class="round" data-back="home" aria-label="Voltar">←</button><h1>Pedido #<span id="orderNo">1042</span></h1></div>
+      <div class="track-hero"><span class="big">🛵</span><b id="trackTitle">Pedido recebido!</b><span class="eta" id="eta">Chega em 35–45 min</span></div>
+      <div class="box">
+        <ul class="steps" id="steps">
+          <li><span class="dot">✓</span><div>Pedido confirmado<small>Pagamento aprovado</small></div></li>
+          <li><span class="dot">👨‍🍳</span><div>Preparando<small>Seu burger está na chapa</small></div></li>
+          <li><span class="dot">🛵</span><div>Saiu para entrega<small>Motoboy a caminho</small></div></li>
+          <li><span class="dot">🏠</span><div>Entregue<small>Bom apetite!</small></div></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+
+  <div class="side">
+    <h1>Brasa Burger</h1>
+    <p>Hamburgueria fictícia criada pela RHPS Systems como protótipo de um app de pedidos completo. Teste à vontade: adicione itens, finalize e acompanhe a entrega.</p>
+  </div>
+
+  <script src="../demo-bar.js" data-kind="um aplicativo de delivery como este"></script>
+  <script>
+    const MENU = [
+      { id: 1, cat: 'Burgers', e: '🍔', name: 'Brasa Clássico', desc: 'Blend 160g, cheddar, cebola caramelizada', price: 32.9, top: true },
+      { id: 2, cat: 'Burgers', e: '🍔', name: 'Duplo Bacon', desc: '2 blends, bacon crocante e molho da casa', price: 41.9, top: true },
+      { id: 3, cat: 'Burgers', e: '🥬', name: 'Veggie', desc: 'Grão-de-bico, rúcula e maionese verde', price: 29.9 },
+      { id: 4, cat: 'Combos', e: '🍱', name: 'Combo da semana', desc: 'Clássico + fritas + refri lata', price: 39.9, top: true },
+      { id: 5, cat: 'Combos', e: '👨‍👩‍👧', name: 'Combo família', desc: '4 burgers, 2 fritas grandes, refri 2L', price: 129.9 },
+      { id: 6, cat: 'Porções', e: '🍟', name: 'Fritas rústicas', desc: 'Com páprica e alecrim', price: 18.9, top: true },
+      { id: 7, cat: 'Porções', e: '🧅', name: 'Onion rings', desc: '12 anéis empanados', price: 21.9 },
+      { id: 8, cat: 'Bebidas', e: '🥤', name: 'Refrigerante lata', desc: '350ml, vários sabores', price: 6.5 },
+      { id: 9, cat: 'Bebidas', e: '🥤', name: 'Milkshake', desc: 'Ovomaltine, morango ou Nutella', price: 19.9 },
+      { id: 10, cat: 'Sobremesas', e: '🍫', name: 'Brownie', desc: 'Com sorvete de creme', price: 16.9 },
+    ];
+    const CATS = ['Mais pedidos', 'Burgers', 'Combos', 'Porções', 'Bebidas', 'Sobremesas'];
+    const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const $ = (id) => document.getElementById(id);
+    const cart = new Map();
+    let cat = 'Mais pedidos';
+    let pay = 'Pix';
+
+    function renderCats() {
+      $('cats').innerHTML = CATS.map((c) => `<button class="cat ${c === cat ? 'on' : ''}" data-cat="${c}">${c}</button>`).join('');
+    }
+    function renderList() {
+      const q = $('q').value.trim().toLowerCase();
+      const items = MENU.filter((m) => q ? m.name.toLowerCase().includes(q) : (cat === 'Mais pedidos' ? m.top : m.cat === cat));
+      $('listTitle').textContent = q ? `Resultados para “${$('q').value}”` : cat;
+      $('list').innerHTML = items.map((m, i) => `
+        <div class="item" style="animation-delay:${i * 40}ms"><div class="emoji">${m.e}</div>
+          <div class="info"><b>${m.name}</b><small>${m.desc}</small><span class="price">${brl(m.price)}</span></div>
+          <button class="add" data-add="${m.id}" aria-label="Adicionar ${m.name}">+</button></div>`).join('') || '<p class="empty">Nada encontrado 😕</p>';
+    }
+    const count = () => [...cart.values()].reduce((a, b) => a + b, 0);
+    const subtotal = () => [...cart].reduce((s, [id, q]) => s + MENU.find((m) => m.id === id).price * q, 0);
+    function renderCart() {
+      const n = count();
+      const badge = $('badge');
+      badge.textContent = n;
+      badge.classList.toggle('show', n > 0);
+      $('cartbar').classList.toggle('show', n > 0);
+      $('cbCount').textContent = `${n} ${n === 1 ? 'item' : 'itens'}`;
+      $('cbTotal').textContent = brl(subtotal());
+      $('lines').innerHTML = [...cart].map(([id, q]) => {
+        const m = MENU.find((x) => x.id === id);
+        return `<div class="line"><div class="emoji">${m.e}</div><div style="flex:1"><b>${m.name}</b><br><small style="color:var(--muted)">${brl(m.price * q)}</small></div>
+          <div class="qty"><button data-dec="${id}">−</button><b>${q}</b><button data-inc="${id}">+</button></div></div>`;
+      }).join('') || '<p class="empty">Sua sacola está vazia</p>';
+      $('sub').textContent = brl(subtotal());
+      $('tot').textContent = brl(subtotal() + (n ? 5 : 0));
+      $('checkout').disabled = !n;
+    }
+    function toast(msg) {
+      const t = $('toast');
+      t.textContent = msg;
+      t.classList.add('show');
+      clearTimeout(toast.timer);
+      toast.timer = setTimeout(() => t.classList.remove('show'), 1600);
+    }
+    function go(id) {
+      const order = ['home', 'cart', 'track'];
+      document.querySelectorAll('.screen').forEach((s) => {
+        const before = order.indexOf(s.id) < order.indexOf(id);
+        s.classList.toggle('hidden', s.id !== id && !before);
+        s.classList.toggle('behind', s.id !== id && before);
+      });
+      document.getElementById(id).scrollTop = 0;
+    }
+    let trackTimer;
+    function startTracking() {
+      $('orderNo').textContent = 1000 + Math.floor(Math.random() * 900);
+      const steps = [...$('steps').children];
+      const titles = ['Pedido confirmado!', 'Preparando seu pedido', 'Saiu para entrega!', 'Pedido entregue! 🎉'];
+      const etas = ['Chega em 35–45 min', 'Chega em 25–35 min', 'Chega em 8–12 min', 'Bom apetite!'];
+      let i = 0;
+      const tick = () => {
+        steps.forEach((s, n) => { s.classList.toggle('ok', n <= i); s.classList.toggle('now', n === i + 1); });
+        $('trackTitle').textContent = titles[i];
+        $('eta').textContent = etas[i];
+        if (i < steps.length - 1) { i++; trackTimer = setTimeout(tick, 2600); }
+      };
+      clearTimeout(trackTimer);
+      tick();
+    }
+
+    document.addEventListener('click', (e) => {
+      const t = e.target.closest('button');
+      if (!t) return;
+      if (t.dataset.cat) { cat = t.dataset.cat; $('q').value = ''; renderCats(); renderList(); }
+      if (t.dataset.add) {
+        const id = Number(t.dataset.add);
+        cart.set(id, (cart.get(id) || 0) + 1);
+        renderCart();
+        $('badge').classList.remove('bump'); void $('badge').offsetWidth; $('badge').classList.add('bump');
+        toast(`${MENU.find((m) => m.id === id).name} adicionado ✓`);
+      }
+      if (t.dataset.inc) { const id = Number(t.dataset.inc); cart.set(id, cart.get(id) + 1); renderCart(); }
+      if (t.dataset.dec) { const id = Number(t.dataset.dec); const q = cart.get(id) - 1; q ? cart.set(id, q) : cart.delete(id); renderCart(); }
+      if (t.dataset.pay) { pay = t.dataset.pay; document.querySelectorAll('[data-pay]').forEach((b) => b.classList.toggle('on', b === t)); }
+      if (t.dataset.back) go(t.dataset.back);
+      if (t.id === 'openCart' || t.id === 'cartbar') go('cart');
+      if (t.id === 'checkout' && count()) { cart.clear(); renderCart(); go('track'); startTracking(); toast(`Pagamento via ${pay} aprovado ✓`); }
+    });
+    $('q').addEventListener('input', renderList);
+    renderCats(); renderList(); renderCart();
+  </script>
+</body>
+</html>
