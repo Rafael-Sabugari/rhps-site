@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pulse Fit | Protótipo RHPS Systems</title>
+  <meta name="description" content="Protótipo da RHPS Systems: site de academia com planos, grade de aulas e reserva de vaga.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#0a0b0d">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../demo-bar.css">
+  <style>
+    :root {
+      --bg: #0a0b0d;
+      --bg-2: #111317;
+      --card: #16191e;
+      --line: rgba(255, 255, 255, 0.09);
+      --text: #f2f5f0;
+      --muted: #9aa39a;
+      --lime: #c6ff3d;
+      --lime-d: #a3e01b;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Inter", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.55; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: "Anton", Impact, sans-serif; font-weight: 400; text-transform: uppercase; line-height: 0.98; margin: 0; letter-spacing: 0.01em; }
+
+    header { position: sticky; top: 0; z-index: 20; background: rgba(10, 11, 13, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+    .logo { font-family: "Anton"; font-size: 1.6rem; letter-spacing: 0.04em; display: flex; align-items: center; gap: 8px; }
+    .logo i { width: 30px; height: 30px; border-radius: 8px; background: var(--lime); color: #0a0b0d; display: grid; place-items: center; font-style: normal; font-size: 1.1rem; }
+    .links { display: flex; gap: 28px; font-size: 0.95rem; color: var(--muted); font-weight: 500; }
+    .links a:hover { color: var(--text); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 12px; background: var(--lime); color: #0a0b0d; font-weight: 800; border: 0; cursor: pointer; font-size: 0.95rem; text-transform: uppercase; letter-spacing: 0.03em; transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px rgba(198, 255, 61, 0.6); }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .hero { position: relative; overflow: hidden; padding: 96px 0 90px; }
+    .hero::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(520px 380px at 80% 40%, rgba(198, 255, 61, 0.16), transparent 70%),
+      repeating-linear-gradient(-60deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 26px); }
+    .hero .wrap { position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 50px; align-items: center; }
+    .tag { display: inline-block; padding: 6px 12px; border-radius: 8px; background: rgba(198, 255, 61, 0.12); color: var(--lime); font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; }
+    .hero h1 { font-size: clamp(3.4rem, 8.4vw, 7rem); margin: 16px 0 18px; }
+    .hero h1 span { color: var(--lime); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 480px; margin: 0 0 30px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .stats { display: flex; gap: 34px; margin-top: 40px; }
+    .stats b { display: block; font-family: "Anton"; font-size: 2.2rem; color: var(--text); font-weight: 400; }
+    .stats span { color: var(--muted); font-size: 0.85rem; }
+
+    .ring-card { background: var(--card); border: 1px solid var(--line); border-radius: 28px; padding: 28px; }
+    .ring-top { display: flex; justify-content: space-between; color: var(--muted); font-size: 0.85rem; margin-bottom: 16px; }
+    .ring-top b { color: var(--text); }
+    .ring { position: relative; width: 200px; height: 200px; margin: 0 auto 18px; border-radius: 50%; background: conic-gradient(var(--lime) calc(var(--p) * 1%), #23272e 0); display: grid; place-items: center; transition: --p 1s; }
+    .ring::before { content: ""; position: absolute; inset: 16px; border-radius: 50%; background: var(--card); }
+    .ring div { position: relative; text-align: center; }
+    .ring b { display: block; font-family: "Anton"; font-size: 3rem; font-weight: 400; line-height: 1; }
+    .ring small { color: var(--muted); }
+    .bars { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; align-items: end; height: 80px; }
+    .bars span { display: block; border-radius: 6px; background: #23272e; position: relative; }
+    .bars span.on { background: var(--lime); }
+    .bars small { position: absolute; bottom: -20px; left: 0; right: 0; text-align: center; color: var(--muted); font-size: 0.7rem; }
+
+    section { padding: 90px 0; }
+    .head { display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: 34px; }
+    .head h2 { font-size: clamp(2.4rem, 5vw, 3.6rem); }
+    .head p { color: var(--muted); margin: 8px 0 0; max-width: 460px; }
+    .alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+    .switch { display: inline-flex; padding: 4px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+    .switch button { padding: 9px 16px; border: 0; border-radius: 9px; background: none; cursor: pointer; color: var(--muted); font-weight: 700; font-size: 0.9rem; }
+    .switch button.on { background: var(--lime); color: #0a0b0d; }
+    .switch em { font-style: normal; font-size: 0.72rem; padding: 2px 6px; border-radius: 6px; background: rgba(198, 255, 61, 0.2); color: var(--lime); margin-left: 4px; }
+    .switch button.on em { background: #0a0b0d; }
+    .plans { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .plan { position: relative; background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; display: flex; flex-direction: column; }
+    .plan.hot { border-color: var(--lime); box-shadow: 0 30px 60px -30px rgba(198, 255, 61, 0.4); }
+    .plan .badge { position: absolute; top: -12px; left: 28px; padding: 4px 12px; border-radius: 8px; background: var(--lime); color: #0a0b0d; font-weight: 800; font-size: 0.75rem; text-transform: uppercase; }
+    .plan h3 { font-size: 1.9rem; }
+    .plan .pr { margin: 14px 0 4px; }
+    .plan .pr b { font-family: "Anton"; font-size: 3rem; font-weight: 400; }
+    .plan .pr small { color: var(--muted); }
+    .plan .sub { color: var(--muted); font-size: 0.85rem; min-height: 1.3em; margin: 0 0 16px; }
+    .plan ul { list-style: none; padding: 0; margin: 0 0 22px; display: grid; gap: 8px; color: var(--muted); font-size: 0.93rem; }
+    .plan li::before { content: "✓"; color: var(--lime); font-weight: 800; margin-right: 8px; }
+    .plan li.no { opacity: 0.4; text-decoration: line-through; }
+    .plan li.no::before { content: "–"; color: var(--muted); }
+    .plan .btn { margin-top: auto; }
+
+    .daytabs { display: flex; gap: 6px; flex-wrap: wrap; }
+    .dt { padding: 9px 14px; border-radius: 10px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-weight: 700; color: var(--muted); }
+    .dt.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .types { display: flex; gap: 6px; flex-wrap: wrap; margin: 14px 0 22px; }
+    .ty { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-size: 0.85rem; color: var(--muted); }
+    .ty.on { border-color: var(--lime); color: var(--lime); }
+    .classes { display: grid; gap: 10px; }
+    .cl { display: grid; grid-template-columns: 90px 1fr 170px 140px; gap: 16px; align-items: center; padding: 16px 20px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); }
+    .cl .hr { font-family: "Anton"; font-size: 1.6rem; }
+    .cl .hr small { display: block; font-family: "Inter"; font-size: 0.75rem; color: var(--muted); }
+    .cl h3 { font-family: "Inter"; text-transform: none; font-weight: 700; font-size: 1.05rem; }
+    .cl .who { color: var(--muted); font-size: 0.85rem; }
+    .cl .lvl { display: inline-block; margin-left: 8px; padding: 2px 8px; border-radius: 6px; font-size: 0.7rem; font-weight: 700; background: #23272e; color: var(--muted); vertical-align: middle; }
+    .vag small { display: block; color: var(--muted); font-size: 0.78rem; margin-bottom: 6px; }
+    .vbar { height: 6px; border-radius: 999px; background: #23272e; overflow: hidden; }
+    .vbar i { display: block; height: 100%; background: var(--lime); transition: width 0.4s; }
+    .vbar i.full { background: #f87171; }
+    .cl .btn { padding: 10px 14px; font-size: 0.82rem; }
+    .cl .btn.booked { background: transparent; color: var(--lime); border: 1px solid var(--lime); }
+    .empty { color: var(--muted); padding: 30px; text-align: center; border: 1px dashed var(--line); border-radius: 18px; }
+
+    .two { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .box { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; }
+    .box h3 { font-size: 2rem; margin-bottom: 6px; }
+    .box > p { color: var(--muted); margin: 0 0 18px; }
+    .fields { display: grid; gap: 10px; }
+    .fields.cols { grid-template-columns: 1fr 1fr; }
+    input, select { width: 100%; padding: 13px 14px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); font: inherit; }
+    input:focus, select:focus { outline: 2px solid var(--lime); outline-offset: 1px; }
+    .imc-out { margin-top: 16px; padding: 16px; border-radius: 16px; background: var(--bg-2); display: none; }
+    .imc-out.show { display: block; animation: pop 0.3s ease; }
+    .imc-out b { font-family: "Anton"; font-size: 2.4rem; font-weight: 400; color: var(--lime); }
+    .scale { position: relative; height: 8px; border-radius: 999px; margin: 12px 0 6px; background: linear-gradient(90deg, #60a5fa 0 14%, #c6ff3d 14% 40%, #fbbf24 40% 60%, #f87171 60%); }
+    .scale i { position: absolute; top: -5px; width: 4px; height: 18px; border-radius: 2px; background: #fff; transition: left 0.4s; }
+    .ok-msg { display: none; text-align: center; padding: 10px 0; }
+    .ok-msg.show { display: block; animation: pop 0.35s ease; }
+    .ok-msg .ic { width: 70px; height: 70px; border-radius: 50%; margin: 0 auto 12px; display: grid; place-items: center; background: var(--lime); color: #0a0b0d; font-size: 2rem; font-weight: 800; }
+    @keyframes pop { from { transform: scale(0.9); opacity: 0; } }
+
+    .toast { position: fixed; left: 50%; top: 84px; z-index: 60; transform: translate(-50%, -20px); padding: 12px 18px; border-radius: 12px; background: var(--lime); color: #0a0b0d; font-weight: 800; opacity: 0; pointer-events: none; transition: all 0.3s; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+    footer { padding: 34px 0 110px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+    @media (max-width: 900px) {
+      .links { display: none; }
+      .hero { padding: 56px 0 64px; }
+      .hero .wrap, .two { grid-template-columns: 1fr; }
+      .plans { grid-template-columns: 1fr; gap: 22px; }
+      .cl { grid-template-columns: 70px 1fr; }
+      .cl .vag, .cl .btn { grid-column: 2; }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 560px) {
+      .nav .btn { padding: 10px 14px; font-size: 0.8rem; }
+      .stats { gap: 22px; }
+      .fields.cols { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="logo"><i>⚡</i>Pulse Fit</a>
+      <nav class="links"><a href="#planos">Planos</a><a href="#aulas">Aulas</a><a href="#experimental">Aula grátis</a></nav>
+      <a href="#experimental" class="btn">Treinar grátis</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="tag">Aberto 24 horas</span>
+        <h1>Bora <span>treinar</span> do seu jeito</h1>
+        <p>Musculação, funcional, spinning e lutas. Reserve sua vaga nas aulas pelo celular e acompanhe sua evolução.</p>
+        <div class="hero-actions">
+          <a href="#experimental" class="btn">Agendar aula grátis</a>
+          <a href="#planos" class="btn ghost">Ver planos</a>
+        </div>
+        <div class="stats">
+          <div><b>2.400+</b><span>alunos ativos</span></div>
+          <div><b>60</b><span>aulas por semana</span></div>
+          <div><b>24h</b><span>todos os dias</span></div>
+        </div>
+      </div>
+      <div class="ring-card" aria-hidden="true">
+        <div class="ring-top"><span>Sua semana</span><b>🔥 5 dias seguidos</b></div>
+        <div class="ring" id="ring" style="--p:0"><div><b id="ringN">0%</b><small>da meta</small></div></div>
+        <div class="bars">
+          <span class="on" style="height:60%"><small>S</small></span>
+          <span class="on" style="height:85%"><small>T</small></span>
+          <span class="on" style="height:45%"><small>Q</small></span>
+          <span class="on" style="height:95%"><small>Q</small></span>
+          <span class="on" style="height:70%"><small>S</small></span>
+          <span style="height:20%"><small>S</small></span>
+          <span style="height:12%"><small>D</small></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="planos" class="alt">
+    <div class="wrap">
+      <div class="head">
+        <div><h2>Escolha seu plano</h2><p>Sem taxa de matrícula. Cancele quando quiser no plano mensal.</p></div>
+        <div class="switch" id="billing">
+          <button type="button" data-bill="m" class="on">Mensal</button>
+          <button type="button" data-bill="a">Anual <em>-20%</em></button>
+        </div>
+      </div>
+      <div class="plans" id="plans"></div>
+    </div>
+  </section>
+
+  <section id="aulas">
+    <div class="wrap">
+      <div class="head">
+        <div><h2>Grade de aulas</h2><p>Reserve sua vaga com um toque. As vagas atualizam na hora.</p></div>
+        <div class="daytabs" id="dayTabs"></div>
+      </div>
+      <div class="types" id="types"></div>
+      <div class="classes" id="classes"></div>
+    </div>
+  </section>
+
+  <section id="experimental" class="alt">
+    <div class="wrap two">
+      <div class="box">
+        <h3>Aula experimental grátis</h3>
+        <p>Venha conhecer a Pulse Fit sem pagar nada. Um professor acompanha seu primeiro treino.</p>
+        <form id="trial" novalidate>
+          <div class="fields">
+            <input id="tName" placeholder="Seu nome" autocomplete="name">
+            <input id="tPhone" placeholder="WhatsApp" inputmode="tel" autocomplete="tel">
+            <div class="fields cols">
+              <select id="tGoal" aria-label="Objetivo"><option value="">Seu objetivo</option><option>Emagrecer</option><option>Ganhar massa</option><option>Condicionamento</option><option>Saúde e bem-estar</option></select>
+              <select id="tWhen" aria-label="Período"><option value="">Melhor período</option><option>Manhã</option><option>Tarde</option><option>Noite</option></select>
+            </div>
+            <button class="btn" id="tBtn" disabled>Quero minha aula grátis</button>
+          </div>
+        </form>
+        <div class="ok-msg" id="tOk"><div class="ic">✓</div><h3 style="font-size:1.8rem">Aula agendada!</h3><p style="color:var(--muted)" id="tOkText"></p></div>
+      </div>
+      <div class="box">
+        <h3>Calcule seu IMC</h3>
+        <p>Um primeiro passo para montar o treino certo para você.</p>
+        <div class="fields cols">
+          <input id="kg" type="number" inputmode="decimal" placeholder="Peso (kg)" min="20" max="300">
+          <input id="cm" type="number" inputmode="numeric" placeholder="Altura (cm)" min="100" max="230">
+        </div>
+        <div class="imc-out" id="imcOut">
+          <b id="imcN">0</b> <span id="imcLabel"></span>
+          <div class="scale"><i id="imcMark"></i></div>
+          <p style="color:var(--muted);margin:10px 0 0;font-size:0.9rem" id="imcTip"></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Pulse Fit é um negócio fictício, criado como protótipo.</footer>
+  <div class="toast" id="toast"></div>
+
+  <script src="../demo-bar.js" data-kind="um site como este"></script>
+  <script>
+    const $ = (id) => document.getElementById(id);
+    const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const toast = (t) => { $('toast').textContent = t; $('toast').classList.add('show'); clearTimeout(toast.t); toast.t = setTimeout(() => $('toast').classList.remove('show'), 1800); };
+
+    // Anel de progresso animado no topo
+    let p = 0;
+    const tick = setInterval(() => { p += 2; $('ring').style.setProperty('--p', p); $('ringN').textContent = `${p}%`; if (p >= 78) clearInterval(tick); }, 18);
+
+    const PLANS = [
+      { name: 'Básico', m: 89, feats: ['Musculação', 'Horário livre 24h', 'App de treino', 'Aulas coletivas', 'Avaliação física mensal'], no: 3 },
+      { name: 'Plus', m: 129, hot: true, feats: ['Musculação', 'Horário livre 24h', 'App de treino', 'Aulas coletivas', 'Avaliação física mensal'], no: 4 },
+      { name: 'Black', m: 179, feats: ['Tudo do Plus', 'Leve 1 amigo por mês', 'Personal 2x por mês', 'Acesso a todas as unidades', 'Avaliação física mensal'], no: 5 },
+    ];
+    let bill = 'm';
+    function renderPlans() {
+      document.querySelectorAll('[data-bill]').forEach((b) => b.classList.toggle('on', b.dataset.bill === bill));
+      $('plans').innerHTML = PLANS.map((pl) => {
+        const v = bill === 'a' ? Math.round(pl.m * 0.8) : pl.m;
+        return `<article class="plan ${pl.hot ? 'hot' : ''}">${pl.hot ? '<span class="badge">Mais escolhido</span>' : ''}
+          <h3>${pl.name}</h3>
+          <p class="pr"><b>${brl(v)}</b> <small>/mês</small></p>
+          <p class="sub">${bill === 'a' ? `${brl(v * 12)} por ano · economia de ${brl((pl.m - v) * 12)}` : 'Sem fidelidade'}</p>
+          <ul>${pl.feats.map((f, i) => `<li class="${i >= pl.no ? 'no' : ''}">${f}</li>`).join('')}</ul>
+          <button type="button" class="btn ${pl.hot ? '' : 'ghost'}" data-plan="${pl.name}">Assinar ${pl.name}</button>
+        </article>`;
+      }).join('');
+    }
+
+    const DAYS = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+    const TYPES = ['Todas', 'Funcional', 'Spinning', 'Lutas', 'Dança', 'Yoga'];
+    const BASE = [
+      { h: '06:30', name: 'Funcional HIIT', type: 'Funcional', who: 'Prof. Diego', min: 45, cap: 20, lvl: 'Intenso' },
+      { h: '07:30', name: 'Spinning', type: 'Spinning', who: 'Prof. Rita', min: 45, cap: 24, lvl: 'Moderado' },
+      { h: '09:00', name: 'Yoga Flow', type: 'Yoga', who: 'Prof. Ana', min: 60, cap: 16, lvl: 'Leve' },
+      { h: '12:15', name: 'Funcional Express', type: 'Funcional', who: 'Prof. Diego', min: 30, cap: 20, lvl: 'Moderado' },
+      { h: '18:00', name: 'Muay Thai', type: 'Lutas', who: 'Prof. Kleber', min: 60, cap: 18, lvl: 'Intenso' },
+      { h: '19:00', name: 'Spinning Night', type: 'Spinning', who: 'Prof. Rita', min: 45, cap: 24, lvl: 'Intenso' },
+      { h: '19:30', name: 'Zumba', type: 'Dança', who: 'Prof. Lia', min: 50, cap: 30, lvl: 'Leve' },
+      { h: '20:30', name: 'Jiu-Jitsu', type: 'Lutas', who: 'Prof. Kleber', min: 60, cap: 16, lvl: 'Moderado' },
+    ];
+    // Cada dia tem uma grade um pouco diferente e vagas já ocupadas
+    const CLASSES = DAYS.map((d, di) => BASE.filter((c, ci) => (di === 5 ? ci % 2 === 0 : (ci + di) % 5 !== 0))
+      .map((c, ci) => ({ ...c, id: `${di}-${ci}`, taken: Math.min(c.cap, Math.round(c.cap * (((ci * 7 + di * 3) % 10) / 10 + 0.05))) })));
+    const booked = new Set();
+    let day = 0;
+    let type = 'Todas';
+
+    $('dayTabs').innerHTML = DAYS.map((d, i) => `<button type="button" class="dt" data-dt="${i}">${d}</button>`).join('');
+    $('types').innerHTML = TYPES.map((t) => `<button type="button" class="ty" data-ty="${t}">${t}</button>`).join('');
+
+    function renderClasses() {
+      document.querySelectorAll('[data-dt]').forEach((b) => b.classList.toggle('on', Number(b.dataset.dt) === day));
+      document.querySelectorAll('[data-ty]').forEach((b) => b.classList.toggle('on', b.dataset.ty === type));
+      const list = CLASSES[day].filter((c) => type === 'Todas' || c.type === type);
+      $('classes').innerHTML = list.length ? list.map((c) => {
+        const mine = booked.has(c.id);
+        const used = c.taken + (mine ? 1 : 0);
+        const full = used >= c.cap;
+        return `<div class="cl">
+          <div class="hr">${c.h}<small>${c.min} min</small></div>
+          <div><h3>${c.name}<span class="lvl">${c.lvl}</span></h3><span class="who">${c.who}</span></div>
+          <div class="vag"><small>${full && !mine ? 'Lotada' : `${c.cap - used} de ${c.cap} vagas`}</small><div class="vbar"><i class="${full ? 'full' : ''}" style="width:${(used / c.cap) * 100}%"></i></div></div>
+          <button type="button" class="btn ${mine ? 'booked' : ''}" data-book="${c.id}" ${full && !mine ? 'disabled' : ''}>${mine ? '✓ Reservada' : full ? 'Lotada' : 'Reservar'}</button>
+        </div>`;
+      }).join('') : '<p class="empty">Nenhuma aula desse tipo neste dia.</p>';
+    }
+
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-bill],[data-dt],[data-ty],[data-book],[data-plan]');
+      if (!b || b.disabled) return;
+      if (b.dataset.bill) { bill = b.dataset.bill; renderPlans(); }
+      if (b.dataset.dt) { day = Number(b.dataset.dt); renderClasses(); }
+      if (b.dataset.ty) { type = b.dataset.ty; renderClasses(); }
+      if (b.dataset.book) {
+        const c = CLASSES.flat().find((x) => x.id === b.dataset.book);
+        if (booked.has(c.id)) { booked.delete(c.id); toast('Reserva cancelada'); }
+        else { booked.add(c.id); toast(`Vaga reservada: ${c.name} às ${c.h}`); }
+        renderClasses();
+      }
+      if (b.dataset.plan) toast(`Plano ${b.dataset.plan} escolhido! Agora é só pagar e treinar.`);
+    });
+
+    // Aula experimental
+    const trialOk = () => $('tName').value.trim().length > 1 && $('tPhone').value.replace(/\D/g, '').length >= 10 && $('tGoal').value && $('tWhen').value;
+    ['tName', 'tPhone', 'tGoal', 'tWhen'].forEach((id) => $(id).addEventListener('input', () => { $('tBtn').disabled = !trialOk(); }));
+    $('tGoal').addEventListener('change', () => { $('tBtn').disabled = !trialOk(); });
+    $('tWhen').addEventListener('change', () => { $('tBtn').disabled = !trialOk(); });
+    $('tPhone').addEventListener('input', (e) => {
+      const d = e.target.value.replace(/\D/g, '').slice(0, 11);
+      e.target.value = d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}` : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
+      $('tBtn').disabled = !trialOk();
+    });
+    $('trial').addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (!trialOk()) return;
+      $('tOkText').textContent = `${$('tName').value.trim().split(' ')[0]}, te esperamos no período da ${$('tWhen').value.toLowerCase()}. Mandamos os detalhes no WhatsApp.`;
+      $('trial').style.display = 'none';
+      $('tOk').classList.add('show');
+    });
+
+    // IMC
+    function imc() {
+      const kg = parseFloat($('kg').value);
+      const m = parseFloat($('cm').value) / 100;
+      if (!(kg > 20 && m > 1)) { $('imcOut').classList.remove('show'); return; }
+      const v = kg / (m * m);
+      const [label, tip] = v < 18.5 ? ['Abaixo do peso', 'Foco em ganho de massa com acompanhamento.']
+        : v < 25 ? ['Peso saudável', 'Ótimo! Vamos manter e ganhar condicionamento.']
+        : v < 30 ? ['Sobrepeso', 'Funcional e spinning ajudam muito a acelerar o resultado.']
+        : ['Obesidade', 'Um treino guiado e gradual é o melhor começo. Fale com a gente.'];
+      $('imcN').textContent = v.toFixed(1).replace('.', ',');
+      $('imcLabel').textContent = label;
+      $('imcTip').textContent = tip;
+      $('imcMark').style.left = `calc(${Math.max(0, Math.min(100, ((v - 15) / 25) * 100))}% - 2px)`;
+      $('imcOut').classList.add('show');
+    }
+    $('kg').addEventListener('input', imc);
+    $('cm').addEventListener('input', imc);
+
+    renderPlans();
+    renderClasses();
+  </script>
+</body>
+</html>

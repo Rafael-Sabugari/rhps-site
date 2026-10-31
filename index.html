@@ -97,7 +97,7 @@
               <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.8-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
               Pedir orçamento no WhatsApp
             </a>
-            <a class="btn btn-ghost" href="#servicos">Ver serviços <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#orcamento">Simular meu orçamento <span aria-hidden="true">→</span></a>
           </div>
           <ul class="hero-points reveal">
             <li>Orçamento sem compromisso</li>
@@ -373,7 +373,7 @@
           </div>
         </div>
 
-        <p class="demos-label reveal">Todos os protótipos</p>
+        <p class="demos-label reveal">Todos os protótipos <span>· 8 exemplos para testar</span></p>
         <div class="demos">
           <a class="demo reveal" href="prototipos/barbearia/" style="--accent: #d4a24c">
             <div class="demo-shot"><img src="assets/portfolio/barbearia.jpg" alt="Site da Barbearia Navalha com agendamento online" width="800" height="500" loading="lazy"></div>
@@ -384,12 +384,48 @@
               <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
             </div>
           </a>
+          <a class="demo reveal" href="prototipos/clinica/" style="--accent: #2dd4bf">
+            <div class="demo-shot"><img src="assets/portfolio/clinica.jpg" alt="Site da Clínica Vitta com agendamento de consultas" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Site · Agenda de consultas</span>
+              <h3>Clínica Vitta</h3>
+              <p>Site para clínica: o paciente escolhe especialidade, profissional, convênio e horário, e recebe a confirmação.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <a class="demo reveal" href="prototipos/salao/" style="--accent: #f4a6c0">
+            <div class="demo-shot"><img src="assets/portfolio/salao.jpg" alt="Site do salão Studio Bella com agendamento de serviços" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Site · Salão de beleza</span>
+              <h3>Studio Bella</h3>
+              <p>A cliente monta o combo de serviços com desconto, escolhe a profissional e agenda. Tem pacotes e cartão fidelidade.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
           <a class="demo reveal" href="prototipos/delivery/" style="--accent: #ff5a1f">
             <div class="demo-shot"><img src="assets/portfolio/delivery.jpg" alt="Aplicativo de delivery da Brasa Burger" width="800" height="500" loading="lazy"></div>
             <div class="demo-body">
               <span class="slide-tag">Aplicativo · Delivery</span>
               <h3>Brasa Burger</h3>
               <p>App de pedidos para hamburgueria: cardápio, sacola, pagamento por Pix e acompanhamento da entrega.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <a class="demo reveal" href="prototipos/loja/" style="--accent: #e59a4b">
+            <div class="demo-shot"><img src="assets/portfolio/loja.jpg" alt="Loja virtual Grão Nobre com carrinho e frete" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Loja virtual · E-commerce</span>
+              <h3>Grão Nobre</h3>
+              <p>Loja com busca, carrinho, cálculo de frete, cupom de desconto e pagamento por Pix ou cartão.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <a class="demo reveal" href="prototipos/academia/" style="--accent: #c6ff3d">
+            <div class="demo-shot"><img src="assets/portfolio/academia.jpg" alt="Site da academia Pulse Fit com planos e grade de aulas" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Site · Academia</span>
+              <h3>Pulse Fit</h3>
+              <p>Planos mensal e anual, grade de aulas com reserva de vaga, aula experimental e calculadora de IMC.</p>
               <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
             </div>
           </a>
@@ -482,7 +518,42 @@
             <p class="price-value"><small>a partir de</small> R$ 5.000</p>
           </article>
         </div>
-        <p class="prices-note reveal">O orçamento é sempre gratuito e sem compromisso. <a href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Peça o seu no WhatsApp →</a></p>
+        <div id="orcamento" class="estimator reveal">
+          <div class="est-head">
+            <p class="kicker">Simulador</p>
+            <h3>Monte seu orçamento em 1 minuto</h3>
+            <p>Marque o que você precisa e veja uma estimativa na hora. Depois é só mandar para o WhatsApp.</p>
+          </div>
+          <div class="est-grid">
+            <div class="est-steps">
+              <fieldset class="est-step">
+                <legend><span>1</span> O que você precisa?</legend>
+                <div class="est-types" id="est-types"></div>
+              </fieldset>
+              <fieldset class="est-step">
+                <legend><span>2</span> Quais funções?</legend>
+                <div class="est-feats" id="est-feats"></div>
+              </fieldset>
+              <fieldset class="est-step">
+                <legend><span>3</span> Para quando?</legend>
+                <div class="est-seg" id="est-deadline">
+                  <button type="button" data-deadline="normal" class="on">Prazo normal</button>
+                  <button type="button" data-deadline="urgente">Urgente <small>+20%</small></button>
+                </div>
+                <label class="est-field"><span>Qual é o seu negócio? <small>(opcional)</small></span><input id="est-biz" type="text" maxlength="60" placeholder="Ex.: pizzaria, clínica, loja de roupas"></label>
+              </fieldset>
+            </div>
+            <aside class="est-result" aria-live="polite">
+              <p class="est-label">Estimativa</p>
+              <p class="est-value" id="est-value">—</p>
+              <ul class="est-list" id="est-list"></ul>
+              <p class="est-time" id="est-time"></p>
+              <a class="btn btn-whatsapp est-send" id="est-send" href="https://wa.me/5517992440805" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+              <p class="est-note">É uma estimativa. O valor final é fechado depois de uma conversa, sem compromisso.</p>
+            </aside>
+          </div>
+        </div>
+        <p class="prices-note reveal">Prefere conversar direto? O orçamento é sempre gratuito e sem compromisso. <a href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Peça o seu no WhatsApp →</a></p>
       </div>
     </section>
 
@@ -624,6 +695,88 @@
       if (promo.duration) progress.style.width = `${(t / promo.duration) * 100}%`;
       chapters.forEach((c) => c.classList.toggle('active', t >= Number(c.dataset.t) && t < Number(c.dataset.end)));
     });
+
+    // Simulador de orçamento
+    const estTypes = [
+      { id: 'landing', name: 'Landing page', icon: '📄', base: 500, weeks: [1, 2] },
+      { id: 'site', name: 'Site institucional', icon: '🌐', base: 1800, weeks: [2, 3] },
+      { id: 'loja', name: 'Loja virtual', icon: '🛒', base: 4000, weeks: [4, 6] },
+      { id: 'app', name: 'Aplicativo', icon: '📱', base: 3500, weeks: [5, 8] },
+      { id: 'sistema', name: 'Sistema sob medida', icon: '⚙️', base: 5000, weeks: [6, 10] },
+    ];
+    const estFeats = [
+      { id: 'agenda', name: 'Agendamento online', price: 800, for: ['site', 'app', 'sistema'] },
+      { id: 'pagamento', name: 'Pagamento online', price: 600, for: ['landing', 'site', 'app', 'sistema'] },
+      { id: 'login', name: 'Área do cliente com login', price: 900, for: ['site', 'loja', 'app', 'sistema'] },
+      { id: 'painel', name: 'Painel para administrar', price: 1000, for: ['site', 'app'] },
+      { id: 'whats', name: 'Integração com WhatsApp', price: 400, for: ['landing', 'site', 'loja', 'app', 'sistema'] },
+      { id: 'relatorios', name: 'Relatórios e gráficos', price: 800, for: ['loja', 'app', 'sistema'] },
+      { id: 'push', name: 'Notificações no celular', price: 500, for: ['app'] },
+      { id: 'blog', name: 'Blog / notícias', price: 400, for: ['site', 'loja'] },
+      { id: 'seo', name: 'Textos e SEO para o Google', price: 400, for: ['landing', 'site', 'loja'] },
+      { id: 'marca', name: 'Logo e identidade visual', price: 500, for: ['landing', 'site', 'loja', 'app', 'sistema'] },
+    ];
+    const est = { type: 'site', feats: new Set(), urgent: false };
+    const estBrl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const estRound = (v) => Math.round(v / 100) * 100;
+    const $est = (id) => document.getElementById(id);
+
+    $est('est-types').innerHTML = estTypes.map((t) => `
+      <button type="button" class="est-type" data-type="${t.id}" aria-pressed="false">
+        <span class="est-icon" aria-hidden="true">${t.icon}</span><span>${t.name}<small>a partir de ${estBrl(t.base)}</small></span>
+      </button>`).join('');
+
+    function renderEstimator() {
+      const type = estTypes.find((t) => t.id === est.type);
+      document.querySelectorAll('.est-type').forEach((b) => {
+        const on = b.dataset.type === est.type;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on);
+      });
+      const feats = estFeats.filter((f) => f.for.includes(est.type));
+      est.feats.forEach((id) => { if (!feats.some((f) => f.id === id)) est.feats.delete(id); });
+      $est('est-feats').innerHTML = feats.map((f) => `
+        <button type="button" class="est-feat ${est.feats.has(f.id) ? 'on' : ''}" data-feat="${f.id}" aria-pressed="${est.feats.has(f.id)}">
+          <span class="est-check" aria-hidden="true"></span>${f.name}<small>+ ${estBrl(f.price)}</small>
+        </button>`).join('');
+      document.querySelectorAll('[data-deadline]').forEach((b) => b.classList.toggle('on', (b.dataset.deadline === 'urgente') === est.urgent));
+
+      const chosen = estFeats.filter((f) => est.feats.has(f.id));
+      let min = type.base + chosen.reduce((a, f) => a + f.price, 0);
+      if (est.urgent) min *= 1.2;
+      min = estRound(min);
+      const max = estRound(min * 1.35);
+      const extraWeeks = Math.ceil(chosen.length / 2);
+      const weeks = est.urgent
+        ? [Math.max(1, Math.ceil((type.weeks[0] + extraWeeks) * 0.7)), Math.ceil((type.weeks[1] + extraWeeks) * 0.7)]
+        : [type.weeks[0] + extraWeeks, type.weeks[1] + extraWeeks];
+
+      $est('est-value').innerHTML = `${estBrl(min)} <small>a</small> ${estBrl(max)}`;
+      $est('est-list').innerHTML = [`<li><b>${type.name}</b></li>`, ...chosen.map((f) => `<li>${f.name}</li>`)].join('');
+      $est('est-time').textContent = `⏱ Pronto em ${weeks[0]} a ${weeks[1]} semanas`;
+
+      const biz = $est('est-biz').value.trim();
+      const msg = [
+        'Olá! Fiz uma simulação no site da RHPS Systems:',
+        `• Projeto: ${type.name}${biz ? ` para ${biz}` : ''}`,
+        chosen.length ? `• Funções: ${chosen.map((f) => f.name).join(', ')}` : null,
+        `• Prazo: ${est.urgent ? 'urgente' : 'normal'}`,
+        `• Estimativa: ${estBrl(min)} a ${estBrl(max)}`,
+        'Pode me passar um orçamento?',
+      ].filter(Boolean).join('\n');
+      $est('est-send').href = `https://wa.me/5517992440805?text=${encodeURIComponent(msg)}`;
+    }
+
+    document.querySelector('.estimator').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-type],[data-feat],[data-deadline]');
+      if (!b) return;
+      if (b.dataset.type) est.type = b.dataset.type;
+      if (b.dataset.feat) est.feats.has(b.dataset.feat) ? est.feats.delete(b.dataset.feat) : est.feats.add(b.dataset.feat);
+      if (b.dataset.deadline) est.urgent = b.dataset.deadline === 'urgente';
+      renderEstimator();
+    });
+    $est('est-biz').addEventListener('input', renderEstimator);
+    renderEstimator();
 
     // Carrossel de exemplos
     const track = document.querySelector('.carousel-track');
