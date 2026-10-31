@@ -750,6 +750,21 @@ h2 {
 .footer .brand { color: var(--text); font-size: 1rem; }
 .footer p { margin: 0; }
 
+.social { display: flex; gap: 10px; }
+
+.social a {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+
+.social a:hover { transform: translateY(-2px); background: var(--surface-strong); border-color: var(--violet); }
+
 /* Botão flutuante */
 .whatsapp-float {
   position: fixed;
@@ -1162,4 +1177,186 @@ h2 {
 
 @media (max-width: 1000px) {
   .demos { grid-template-columns: 1fr; max-width: 560px; }
+}
+
+/* Vídeo de apresentação */
+.video-section { overflow: hidden; }
+
+.video-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 64px;
+}
+
+.video-copy .section-lead { margin-bottom: 28px; }
+
+.video-chapters { display: grid; gap: 12px; margin-bottom: 32px; }
+
+.chapter {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color 0.25s, background 0.25s, transform 0.25s;
+}
+
+.chapter:hover { transform: translateX(6px); border-color: var(--border-strong); }
+
+.chapter.active {
+  border-color: rgba(139, 92, 246, 0.7);
+  background: linear-gradient(120deg, rgba(59, 130, 246, 0.14), rgba(139, 92, 246, 0.22));
+  box-shadow: 0 12px 30px -16px rgba(139, 92, 246, 0.9);
+}
+
+.chapter-icon {
+  flex: none;
+  width: 46px;
+  height: 46px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  background: var(--surface-strong);
+  font-size: 1.4rem;
+}
+
+.chapter strong { display: block; font-size: 1.02rem; }
+.chapter small { display: block; color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 0.8rem; }
+
+.video-actions { display: flex; flex-wrap: wrap; gap: 14px; }
+
+.video-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  padding: 30px 0;
+}
+
+.video-glow {
+  position: absolute;
+  width: 120%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.45), rgba(59, 130, 246, 0.18) 45%, transparent 70%);
+  filter: blur(20px);
+  animation: video-pulse 5s ease-in-out infinite;
+}
+
+@keyframes video-pulse {
+  50% { transform: scale(1.08); opacity: 0.8; }
+}
+
+.video-phone {
+  position: relative;
+  width: min(330px, 78vw);
+  aspect-ratio: 9 / 16;
+  padding: 10px;
+  border-radius: 44px;
+  background: #0b0f1c;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px var(--border-strong);
+  isolation: isolate;
+}
+
+/* Borda em degradê girando em volta do celular */
+.video-phone::before {
+  content: "";
+  position: absolute;
+  inset: -3px;
+  z-index: -1;
+  border-radius: 47px;
+  background: conic-gradient(from var(--spin, 0deg), var(--blue), var(--violet), var(--cyan), var(--blue));
+  animation: video-spin 6s linear infinite;
+}
+
+@property --spin { syntax: "<angle>"; inherits: false; initial-value: 0deg; }
+@keyframes video-spin { to { --spin: 360deg; } }
+
+.video-phone video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 34px;
+  background: #12062a;
+}
+
+.video-sound {
+  position: absolute;
+  left: 50%;
+  bottom: 30px;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 999px;
+  background: rgba(7, 11, 22, 0.7);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font: 600 0.9rem "Inter", sans-serif;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+
+.video-sound:hover { background: rgba(139, 92, 246, 0.7); }
+.video-sound[aria-pressed="true"] { opacity: 0.75; }
+
+.video-progress {
+  position: absolute;
+  left: 30px;
+  right: 30px;
+  bottom: 18px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.18);
+  overflow: hidden;
+}
+
+.video-progress span { display: block; width: 0; height: 100%; background: var(--gradient); }
+
+.video-chip {
+  position: absolute;
+  z-index: 2;
+  padding: 10px 16px;
+  border-radius: 999px;
+  border: 1px solid var(--border-strong);
+  background: rgba(12, 18, 34, 0.85);
+  backdrop-filter: blur(8px);
+  font-weight: 600;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.8);
+  animation: video-float 4s ease-in-out infinite;
+}
+
+.video-chip-1 { top: 70px; left: -10px; }
+.video-chip-2 { bottom: 110px; right: -10px; animation-delay: -2s; }
+
+@keyframes video-float {
+  50% { transform: translateY(-10px); }
+}
+
+@media (max-width: 1000px) {
+  /* No celular o vídeo aparece logo depois do título */
+  .video-grid { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+  .video-copy { display: contents; }
+  .video-copy .section-lead { margin-bottom: 8px; }
+  .video-stage { order: 1; margin-bottom: 28px; }
+  .video-chapters { order: 2; }
+  .video-actions { order: 3; }
+  .video-chip-1 { left: 0; }
+  .video-chip-2 { right: 0; }
+}
+
+@media (max-width: 720px) {
+  .video-actions .btn { width: 100%; }
 }
