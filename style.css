@@ -1214,7 +1214,12 @@ h2 {
 @media (max-width: 720px) {
   .carousel-head { align-items: flex-start; flex-direction: column; margin-bottom: 28px; }
   .carousel-nav { display: none; }
-  .slide { flex-basis: 86%; }
+  .carousel-track {
+    margin: 0 -20px;
+    padding: 4px 20px 8px;
+    scroll-padding-inline: 20px;
+  }
+  .slide { flex-basis: 84%; scroll-snap-stop: always; }
   .prices { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .price-featured { margin-top: 8px; }
 }
