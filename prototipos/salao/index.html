@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Studio Bella | Protótipo RHPS Systems</title>
+  <meta name="description" content="Protótipo da RHPS Systems: site de salão de beleza com agendamento de vários serviços.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#1a0f17">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../demo-bar.css">
+  <style>
+    :root {
+      --bg: #1a0f17;
+      --bg-2: #221420;
+      --card: #2a1928;
+      --line: rgba(255, 210, 225, 0.12);
+      --text: #fbeef3;
+      --muted: #c3a6b5;
+      --rose: #f4a6c0;
+      --gold: #e8c39e;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "DM Sans", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 600; line-height: 1.05; margin: 0; }
+
+    header { position: sticky; top: 0; z-index: 20; background: rgba(26, 15, 23, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { font-family: "Cormorant Garamond"; font-size: 1.8rem; font-style: italic; letter-spacing: 0.02em; }
+    .logo b { font-style: normal; color: var(--rose); }
+    .links { display: flex; gap: 28px; font-size: 0.95rem; color: var(--muted); }
+    .links a:hover { color: var(--text); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 999px; background: linear-gradient(120deg, var(--rose), var(--gold)); color: #2a0f1d; font-weight: 700; border: 0; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px rgba(244, 166, 192, 0.7); }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .hero { position: relative; overflow: hidden; padding: 90px 0 100px; }
+    .hero::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(560px 420px at 78% 30%, rgba(244, 166, 192, 0.22), transparent 70%),
+      radial-gradient(400px 300px at 0% 100%, rgba(232, 195, 158, 0.12), transparent 70%); }
+    .hero .wrap { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+    .eyebrow { color: var(--rose); font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; font-size: 0.78rem; }
+    .hero h1 { font-size: clamp(3rem, 7vw, 5.6rem); margin: 14px 0 18px; }
+    .hero h1 em { color: var(--rose); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 470px; margin: 0 0 30px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .hero-art { position: relative; aspect-ratio: 4 / 5; }
+    .arch { position: absolute; inset: 0 12% 0 0; border-radius: 999px 999px 28px 28px; overflow: hidden; border: 1px solid var(--line); display: grid; place-items: center;
+      background: radial-gradient(circle at 50% 30%, rgba(255,255,255,0.25), transparent 45%), linear-gradient(170deg, #f4a6c0 0%, #a8557a 48%, #3b2034 100%); }
+    .arch::before { content: ""; position: absolute; width: 74%; aspect-ratio: 1; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.45); animation: turn 30s linear infinite; }
+    .arch::after { content: ""; position: absolute; inset: 0; background: repeating-radial-gradient(circle at 50% 120%, rgba(255,255,255,0.05) 0 2px, transparent 2px 22px); }
+    .mono { position: relative; z-index: 1; font-family: "Cormorant Garamond"; font-style: italic; font-weight: 500; font-size: clamp(9rem, 18vw, 15rem); line-height: 1; color: #fff7fa; text-shadow: 0 20px 50px rgba(59, 32, 52, 0.6); }
+    .orbit { position: absolute; z-index: 2; width: 74%; aspect-ratio: 1; top: 50%; left: 50%; translate: -50% -50%; animation: turn 30s linear infinite; }
+    .orbit span { position: absolute; width: 46px; height: 46px; margin: -23px 0 0 -23px; border-radius: 50%; display: grid; place-items: center; background: #fff7fa; font-size: 1.3rem; box-shadow: 0 10px 24px -8px rgba(0,0,0,0.5); animation: turn 30s linear infinite reverse; }
+    .orbit span:nth-child(1) { left: 50%; top: 0; }
+    .orbit span:nth-child(2) { left: 100%; top: 50%; }
+    .orbit span:nth-child(3) { left: 50%; top: 100%; }
+    .orbit span:nth-child(4) { left: 0; top: 50%; }
+    @keyframes turn { to { transform: rotate(360deg); } }
+    .float { position: absolute; background: rgba(42, 25, 40, 0.92); border: 1px solid var(--line); border-radius: 18px; padding: 12px 16px; backdrop-filter: blur(8px); box-shadow: 0 20px 40px -20px rgba(0,0,0,0.8); animation: float 5s ease-in-out infinite; }
+    .float small { display: block; color: var(--muted); font-size: 0.78rem; }
+    .f1 { right: 0; top: 14%; }
+    .f2 { left: -6%; bottom: 14%; animation-delay: -2.5s; }
+    @keyframes float { 50% { transform: translateY(-10px); } }
+
+    section { padding: 90px 0; }
+    .head { text-align: center; margin: 0 auto 40px; max-width: 620px; }
+    .head h2 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin: 8px 0 10px; }
+    .head p { color: var(--muted); margin: 0; }
+    .alt { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+
+    .tabs { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .tab { padding: 10px 18px; border-radius: 999px; border: 1px solid var(--line); background: transparent; cursor: pointer; color: var(--muted); font-weight: 600; }
+    .tab.on { background: var(--text); color: var(--bg); border-color: var(--text); }
+    .layout { display: grid; grid-template-columns: 1.4fr 0.6fr; gap: 24px; align-items: start; }
+    .menu { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .svc { position: relative; display: flex; gap: 14px; align-items: center; padding: 18px; border-radius: 20px; background: var(--card); border: 1px solid var(--line); cursor: pointer; text-align: left; transition: border-color 0.2s, transform 0.2s; }
+    .svc:hover { transform: translateY(-2px); border-color: rgba(244, 166, 192, 0.4); }
+    .svc .ic { width: 50px; height: 50px; flex: none; border-radius: 16px; display: grid; place-items: center; font-size: 1.4rem; background: rgba(244, 166, 192, 0.1); }
+    .svc div { flex: 1; min-width: 0; }
+    .svc h3 { font-size: 1.35rem; }
+    .svc small { color: var(--muted); font-size: 0.82rem; }
+    .svc .pr { font-weight: 700; color: var(--gold); white-space: nowrap; }
+    .svc .add { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 0.85rem; color: var(--muted); }
+    .svc.on { border-color: var(--rose); background: linear-gradient(140deg, rgba(244, 166, 192, 0.14), rgba(42, 25, 40, 1)); }
+    .svc.on .add { background: var(--rose); border-color: var(--rose); color: #2a0f1d; font-weight: 700; }
+
+    .bag { position: sticky; top: 90px; background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 24px; }
+    .bag h3 { font-size: 1.6rem; margin-bottom: 12px; }
+    .bag ul { list-style: none; margin: 0 0 14px; padding: 0; display: grid; gap: 8px; }
+    .bag li { display: flex; justify-content: space-between; gap: 10px; font-size: 0.92rem; color: var(--muted); }
+    .bag li b { color: var(--text); font-weight: 500; }
+    .bag .empty { color: var(--muted); font-size: 0.9rem; margin: 0 0 14px; }
+    .tot { display: flex; justify-content: space-between; align-items: baseline; border-top: 1px dashed var(--line); padding-top: 14px; margin-bottom: 16px; }
+    .tot b { font-family: "Cormorant Garamond"; font-size: 2.1rem; color: var(--gold); }
+    .tot small { color: var(--muted); }
+    .combo { margin: 0 0 14px; padding: 10px 12px; border-radius: 14px; background: rgba(232, 195, 158, 0.12); color: var(--gold); font-size: 0.85rem; display: none; }
+    .combo.show { display: block; animation: pop 0.3s ease; }
+
+    .pros { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+    .pro { padding: 14px 8px; border-radius: 18px; border: 1px solid var(--line); background: transparent; cursor: pointer; text-align: center; }
+    .pro .av { width: 54px; height: 54px; margin: 0 auto 8px; border-radius: 50%; display: grid; place-items: center; font-family: "Cormorant Garamond"; font-size: 1.5rem; font-weight: 600; color: #2a0f1d; }
+    .pro small { display: block; color: var(--muted); font-size: 0.75rem; }
+    .pro.on { border-color: var(--rose); background: rgba(244, 166, 192, 0.08); }
+    .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--muted); margin: 22px 0 10px; font-weight: 600; }
+    .days { display: grid; grid-template-columns: repeat(7, 1fr); gap: 6px; }
+    .day { padding: 9px 0; border-radius: 14px; border: 1px solid var(--line); background: transparent; cursor: pointer; text-align: center; }
+    .day small { display: block; font-size: 0.68rem; color: var(--muted); text-transform: uppercase; }
+    .day.on { background: var(--rose); border-color: var(--rose); color: #2a0f1d; }
+    .day.on small { color: #6b2a46; }
+    .times { display: flex; flex-wrap: wrap; gap: 8px; }
+    .time { padding: 9px 14px; border-radius: 12px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+    .time.on { background: var(--rose); color: #2a0f1d; border-color: var(--rose); }
+    .time:disabled { opacity: 0.28; cursor: not-allowed; text-decoration: line-through; }
+    .sched { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 26px; }
+    .sched .label:first-child { margin-top: 0; }
+
+    .modal { position: fixed; inset: 0; z-index: 50; display: none; place-items: center; padding: 20px; background: rgba(10, 5, 9, 0.7); backdrop-filter: blur(6px); }
+    .modal.show { display: grid; }
+    .modal-box { width: min(420px, 100%); background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 30px; text-align: center; animation: pop 0.35s ease; }
+    .modal-box .check { width: 72px; height: 72px; border-radius: 50%; margin: 0 auto 14px; display: grid; place-items: center; font-size: 2rem; background: linear-gradient(120deg, var(--rose), var(--gold)); color: #2a0f1d; }
+    .modal-box h3 { font-size: 2rem; }
+    .modal-box p { color: var(--muted); }
+    @keyframes pop { from { transform: scale(0.9); opacity: 0; } }
+
+    .packs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .pack { display: flex; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 22px; }
+    .pack .ic { font-size: 1.8rem; }
+    .pack h3 { font-size: 1.6rem; margin: 10px 0 4px; }
+    .pack p { color: var(--muted); font-size: 0.88rem; margin: 0 0 14px; }
+    .pack .pp { margin-top: auto; display: flex; align-items: baseline; gap: 8px; margin-bottom: 14px; }
+    .pack .pp b { font-family: "Cormorant Garamond"; font-size: 2rem; color: var(--gold); }
+    .pack .pp s { color: var(--muted); font-size: 0.85rem; }
+    .pack .btn { padding: 11px 16px; font-size: 0.88rem; }
+    .loyal { margin-top: 26px; display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 24px; align-items: center; padding: 28px; border-radius: 26px; border: 1px solid rgba(244, 166, 192, 0.35); background: linear-gradient(120deg, rgba(244, 166, 192, 0.12), rgba(232, 195, 158, 0.08)); }
+    .loyal h3 { font-size: 2rem; }
+    .loyal p { color: var(--muted); margin: 6px 0 0; }
+    .stamps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 10px; width: 100%; max-width: 360px; justify-self: end; }
+    .stamps span { aspect-ratio: 1; border-radius: 50%; border: 2px dashed rgba(244, 166, 192, 0.4); display: grid; place-items: center; font-size: 1.2rem; }
+    .stamps span.on { border: 0; background: linear-gradient(120deg, var(--rose), var(--gold)); color: #2a0f1d; animation: pop 0.35s ease backwards; }
+    .stamps span.gift { border-style: solid; border-color: var(--gold); }
+    .reviews { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .rev { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 24px; }
+    .rev .st { color: var(--gold); letter-spacing: 3px; }
+    .rev p { color: var(--muted); margin: 8px 0 12px; }
+    footer { padding: 34px 0 110px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+    @media (max-width: 900px) {
+      .links { display: none; }
+      .packs { grid-template-columns: repeat(2, 1fr); }
+      .loyal { grid-template-columns: 1fr; }
+      .stamps { justify-self: start; }
+      .hero { padding: 50px 0 70px; }
+      .hero .wrap, .layout { grid-template-columns: 1fr; }
+      .hero-art { max-width: 360px; width: 100%; margin: 0 auto; }
+      .reviews { grid-template-columns: 1fr; }
+      .bag { position: static; }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 560px) {
+      .nav .btn { padding: 10px 16px; }
+      .menu, .packs { grid-template-columns: 1fr; }
+      .pros { grid-template-columns: repeat(2, 1fr); }
+      .days { grid-template-columns: repeat(4, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="logo">Studio <b>Bella</b></a>
+      <nav class="links"><a href="#servicos">Serviços</a><a href="#pacotes">Pacotes</a><a href="#avaliacoes">Avaliações</a></nav>
+      <a href="#servicos" class="btn">Agendar</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="eyebrow">Salão de beleza · Centro</span>
+        <h1>Seu momento de <em>brilhar</em> começa aqui.</h1>
+        <p>Cabelo, unhas, estética e maquiagem. Monte o seu combo, escolha a profissional e agende sem precisar mandar mensagem.</p>
+        <div class="hero-actions">
+          <a href="#servicos" class="btn">💅 Montar meu horário</a>
+          <a href="#pacotes" class="btn ghost">Ver pacotes</a>
+        </div>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <div class="arch"><span class="mono">B</span><div class="orbit"><span>✂️</span><span>💅</span><span>💄</span><span>✨</span></div></div>
+        <div class="float f1"><b>⭐ 4,9 no Google</b><small>+ de 1.200 avaliações</small></div>
+        <div class="float f2"><b>💗 Horário livre hoje</b><small>Escova às 16:00</small></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="servicos" class="alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Serviços</span><h2>Monte o seu horário</h2><p>Toque nos serviços que quiser. Fazendo 2 ou mais, você ganha 10% de desconto.</p></div>
+      <div class="tabs" id="tabs"></div>
+      <div class="layout">
+        <div>
+          <div class="menu" id="menu"></div>
+          <div class="sched" id="sched" style="margin-top:20px">
+            <p class="label">Profissional</p>
+            <div class="pros" id="pros"></div>
+            <p class="label">Dia</p>
+            <div class="days" id="days"></div>
+            <p class="label">Horário</p>
+            <div class="times" id="times"></div>
+          </div>
+        </div>
+        <aside class="bag">
+          <h3>Seu horário</h3>
+          <p class="empty" id="empty">Nenhum serviço escolhido ainda.</p>
+          <ul id="bagList"></ul>
+          <div class="combo" id="combo">🎁 Combo ativado: 10% de desconto</div>
+          <div class="tot"><small id="dur">0 min</small><b id="total">R$ 0</b></div>
+          <p class="empty" id="when" style="margin-top:-6px">Escolha profissional, dia e horário.</p>
+          <button class="btn" id="book" style="width:100%" disabled>Confirmar agendamento</button>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="pacotes">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Pacotes</span><h2>Combos que fazem sucesso</h2><p>Escolha um pacote e ele já vai montado para o seu horário.</p></div>
+      <div class="packs" id="packs"></div>
+      <div class="loyal">
+        <div><h3>Cartão fidelidade</h3><p>A cada 9 visitas, a 10ª escova é por nossa conta. Seus carimbos ficam salvos no seu WhatsApp.</p></div>
+        <div class="stamps" id="stamps" aria-label="7 de 10 carimbos"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="avaliacoes" class="alt">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Avaliações</span><h2>Quem vem, volta</h2></div>
+      <div class="reviews">
+        <div class="rev"><div class="st">★★★★★</div><p>“Agendei unha e escova juntas pelo site e já saiu com desconto. Prático demais!”</p><b>Juliana R.</b></div>
+        <div class="rev"><div class="st">★★★★★</div><p>“A Carla é uma artista. Minha morena iluminada ficou exatamente como eu queria.”</p><b>Fernanda C.</b></div>
+        <div class="rev"><div class="st">★★★★★</div><p>“Amo receber o lembrete no WhatsApp. Nunca mais esqueci horário.”</p><b>Patrícia M.</b></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Studio Bella é um negócio fictício, criado como protótipo.</footer>
+
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="mTitle">
+    <div class="modal-box">
+      <div class="check">✓</div>
+      <h3 id="mTitle">Tudo certo!</h3>
+      <p id="mText"></p>
+      <p style="font-size:0.85rem">Você vai receber a confirmação e um lembrete no WhatsApp.</p>
+      <button class="btn" id="close">Fechar</button>
+    </div>
+  </div>
+
+  <script src="../demo-bar.js" data-kind="um site com agenda como este"></script>
+  <script>
+    const CATS = ['Cabelo', 'Unhas', 'Estética', 'Maquiagem'];
+    const SVCS = [
+      { id: 'corte', cat: 'Cabelo', ic: '✂️', name: 'Corte feminino', min: 50, price: 90 },
+      { id: 'escova', cat: 'Cabelo', ic: '💨', name: 'Escova modelada', min: 45, price: 65 },
+      { id: 'hidra', cat: 'Cabelo', ic: '💧', name: 'Hidratação', min: 40, price: 80 },
+      { id: 'luzes', cat: 'Cabelo', ic: '🌟', name: 'Morena iluminada', min: 210, price: 380 },
+      { id: 'mao', cat: 'Unhas', ic: '💅', name: 'Manicure', min: 40, price: 35 },
+      { id: 'pe', cat: 'Unhas', ic: '🦶', name: 'Pedicure', min: 45, price: 40 },
+      { id: 'gel', cat: 'Unhas', ic: '💎', name: 'Alongamento em gel', min: 120, price: 160 },
+      { id: 'spa', cat: 'Unhas', ic: '🛁', name: 'Spa dos pés', min: 50, price: 70 },
+      { id: 'sobrancelha', cat: 'Estética', ic: '👁️', name: 'Design de sobrancelha', min: 30, price: 45 },
+      { id: 'cilios', cat: 'Estética', ic: '🪶', name: 'Extensão de cílios', min: 120, price: 180 },
+      { id: 'limpeza', cat: 'Estética', ic: '🧖‍♀️', name: 'Limpeza de pele', min: 70, price: 140 },
+      { id: 'depil', cat: 'Estética', ic: '🌿', name: 'Depilação com cera', min: 40, price: 60 },
+      { id: 'social', cat: 'Maquiagem', ic: '💄', name: 'Maquiagem social', min: 60, price: 150 },
+      { id: 'noiva', cat: 'Maquiagem', ic: '👰', name: 'Dia da noiva', min: 240, price: 890 },
+      { id: 'pele', cat: 'Maquiagem', ic: '🌸', name: 'Pele glow', min: 40, price: 90 },
+      { id: 'aula', cat: 'Maquiagem', ic: '🎓', name: 'Aula de automaquiagem', min: 120, price: 220 },
+    ];
+    const PROS = [
+      { name: 'Carla', role: 'Cabelo', cats: ['Cabelo'], color: '#f4a6c0' },
+      { name: 'Bia', role: 'Unhas', cats: ['Unhas'], color: '#e8c39e' },
+      { name: 'Lari', role: 'Estética', cats: ['Estética', 'Maquiagem'], color: '#c4b5fd' },
+      { name: 'Qualquer', role: 'Mais cedo', cats: CATS, color: '#fbeef3' },
+    ];
+    const TIMES = ['09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00'];
+    const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const hm = (m) => (m >= 60 ? `${Math.floor(m / 60)}h${m % 60 ? String(m % 60).padStart(2, '0') : ''}` : `${m} min`);
+    const $ = (id) => document.getElementById(id);
+    const st = { cat: 'Cabelo', picked: new Set(), pro: null, day: null, time: null };
+
+    $('tabs').innerHTML = CATS.map((c) => `<button type="button" class="tab" data-cat="${c}">${c}</button>`).join('');
+    $('pros').innerHTML = PROS.map((p, i) => `<button type="button" class="pro" data-pro="${i}"><span class="av" style="background:${p.color}">${p.name === 'Qualquer' ? '★' : p.name[0]}</span>${p.name}<small>${p.role}</small></button>`).join('');
+    const week = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+    const days = [];
+    for (let n = 0; days.length < 7; n++) {
+      const d = new Date(); d.setDate(d.getDate() + n);
+      if (d.getDay() !== 0 && d.getDay() !== 1) days.push(d);
+    }
+    $('days').innerHTML = days.map((d, i) => `<button type="button" class="day" data-day="${i}"><small>${week[d.getDay()]}</small><b>${d.getDate()}</b></button>`).join('');
+    const busy = (p, d, t) => (p * 3 + d * 5 + t * 2) % 4 === 1;
+
+    function render() {
+      document.querySelectorAll('[data-cat]').forEach((b) => b.classList.toggle('on', b.dataset.cat === st.cat));
+      $('menu').innerHTML = SVCS.filter((s) => s.cat === st.cat).map((s) => `
+        <button type="button" class="svc ${st.picked.has(s.id) ? 'on' : ''}" data-svc="${s.id}" aria-pressed="${st.picked.has(s.id)}">
+          <span class="ic">${s.ic}</span><div><h3>${s.name}</h3><small>⏱ ${hm(s.min)}</small></div><span class="pr">${brl(s.price)}</span><span class="add">${st.picked.has(s.id) ? '✓' : '+'}</span>
+        </button>`).join('');
+      document.querySelectorAll('[data-pro]').forEach((b) => b.classList.toggle('on', Number(b.dataset.pro) === st.pro));
+      document.querySelectorAll('[data-day]').forEach((b) => b.classList.toggle('on', Number(b.dataset.day) === st.day));
+      $('times').innerHTML = TIMES.map((t, i) => {
+        const off = st.pro === null || st.day === null || busy(st.pro, st.day, i);
+        return `<button type="button" class="time ${st.time === t ? 'on' : ''}" data-time="${t}" ${off ? 'disabled' : ''}>${t}</button>`;
+      }).join('');
+
+      const list = SVCS.filter((s) => st.picked.has(s.id));
+      const sum = list.reduce((a, s) => a + s.price, 0);
+      const total = list.length >= 2 ? Math.round(sum * 0.9) : sum;
+      $('bagList').innerHTML = list.map((s) => `<li><b>${s.name}</b><span>${brl(s.price)}</span></li>`).join('');
+      $('empty').style.display = list.length ? 'none' : '';
+      $('combo').classList.toggle('show', list.length >= 2);
+      $('total').textContent = brl(total);
+      $('dur').textContent = `⏱ ${hm(list.reduce((a, s) => a + s.min, 0))}`;
+      const day = st.day !== null ? days[st.day] : null;
+      $('when').textContent = day && st.time && st.pro !== null
+        ? `${PROS[st.pro].name === 'Qualquer' ? 'Primeira profissional livre' : `Com ${PROS[st.pro].name}`} · ${day.toLocaleDateString('pt-BR', { weekday: 'long', day: '2-digit', month: '2-digit' })} às ${st.time}`
+        : 'Escolha profissional, dia e horário.';
+      $('book').disabled = !(list.length && st.pro !== null && day && st.time);
+    }
+
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-cat],[data-svc],[data-pro],[data-day],[data-time]');
+      if (!b || b.disabled) return;
+      if (b.dataset.cat) st.cat = b.dataset.cat;
+      if (b.dataset.svc) { st.picked.has(b.dataset.svc) ? st.picked.delete(b.dataset.svc) : st.picked.add(b.dataset.svc); }
+      if (b.dataset.pro) { st.pro = Number(b.dataset.pro); st.time = null; }
+      if (b.dataset.day) { st.day = Number(b.dataset.day); st.time = null; }
+      if (b.dataset.time) st.time = b.dataset.time;
+      render();
+    });
+    $('book').addEventListener('click', () => {
+      const names = SVCS.filter((s) => st.picked.has(s.id)).map((s) => s.name);
+      $('mText').textContent = `${names.join(', ')} · ${$('when').textContent}. Total ${$('total').textContent}.`;
+      $('modal').classList.add('show');
+      $('close').focus();
+    });
+    $('close').addEventListener('click', () => {
+      $('modal').classList.remove('show');
+      Object.assign(st, { picked: new Set(), pro: null, day: null, time: null });
+      render();
+    });
+
+    // Pacotes prontos que montam o horário
+    const PACKS = [
+      { ic: '👑', name: 'Dia de princesa', desc: 'Escova, manicure e pedicure.', ids: ['escova', 'mao', 'pe'] },
+      { ic: '💅', name: 'Mãos e pés', desc: 'Manicure, pedicure e spa dos pés.', ids: ['mao', 'pe', 'spa'] },
+      { ic: '👁️', name: 'Olhar marcante', desc: 'Design de sobrancelha e cílios.', ids: ['sobrancelha', 'cilios'] },
+      { ic: '🥂', name: 'Pronta pra festa', desc: 'Escova, maquiagem e manicure.', ids: ['escova', 'social', 'mao'] },
+    ];
+    $('packs').innerHTML = PACKS.map((pk, i) => {
+      const sum = pk.ids.reduce((a, id) => a + SVCS.find((s) => s.id === id).price, 0);
+      return `<article class="pack"><span class="ic">${pk.ic}</span><h3>${pk.name}</h3><p>${pk.desc}</p>
+        <div class="pp"><b>${brl(Math.round(sum * 0.9))}</b><s>${brl(sum)}</s></div>
+        <button type="button" class="btn" data-pack="${i}">Quero esse</button></article>`;
+    }).join('');
+    $('stamps').innerHTML = Array.from({ length: 10 }, (_, i) => `<span class="${i < 7 ? 'on' : i === 9 ? 'gift' : ''}" style="animation-delay:${i * 0.06}s">${i < 7 ? '✓' : i === 9 ? '🎁' : ''}</span>`).join('');
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-pack]');
+      if (!b) return;
+      const pk = PACKS[b.dataset.pack];
+      st.picked = new Set(pk.ids);
+      st.cat = SVCS.find((s) => s.id === pk.ids[0]).cat;
+      render();
+      document.getElementById('servicos').scrollIntoView({ behavior: 'smooth' });
+    });
+    render();
+  </script>
+</body>
+</html>

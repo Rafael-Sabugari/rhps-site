@@ -333,42 +333,47 @@
       </div>
     </section>
 
-    <section id="video" class="section video-section">
-      <div class="container video-grid">
-        <div class="video-copy reveal">
-          <p class="kicker">Em 40 segundos</p>
-          <h2>Veja o seu negócio <span class="gradient-text">funcionando no celular</span></h2>
-          <p class="section-lead">Três exemplos reais criados pela RHPS Systems: um site que agenda sozinho, um app de delivery com a sua marca e um sistema que mostra cada venda. Toque em um deles para pular direto.</p>
-          <div class="video-chapters" role="group" aria-label="Pular para um exemplo do vídeo">
-            <button type="button" class="chapter" data-t="7.5" data-end="15"><span class="chapter-icon" aria-hidden="true">💈</span><span><strong>Site com agenda online</strong><small>Barbearia · 0:07</small></span></button>
-            <button type="button" class="chapter" data-t="15" data-end="22.5"><span class="chapter-icon" aria-hidden="true">🍔</span><span><strong>App de delivery</strong><small>Hamburgueria · 0:15</small></span></button>
-            <button type="button" class="chapter" data-t="22.5" data-end="30"><span class="chapter-icon" aria-hidden="true">📊</span><span><strong>Sistema de vendas (CRM)</strong><small>Painel e funil · 0:22</small></span></button>
-          </div>
-          <div class="video-actions">
-            <a class="btn btn-whatsapp" href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Vi%20o%20v%C3%ADdeo%20no%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Quero um assim</a>
-            <a class="btn btn-ghost" href="#prototipos">Testar os protótipos <span aria-hidden="true">→</span></a>
-          </div>
-        </div>
-        <div class="video-stage reveal">
-          <div class="video-glow" aria-hidden="true"></div>
-          <span class="video-chip video-chip-1" aria-hidden="true">▶ 3 exemplos reais</span>
-          <span class="video-chip video-chip-2" aria-hidden="true">✦ Feito sob medida</span>
-          <div class="video-phone">
-            <video id="promo-video" src="assets/video/rhps-propaganda.mp4" poster="assets/video/rhps-propaganda-capa.jpg" muted loop playsinline preload="none" width="720" height="1280" aria-label="Vídeo com exemplos de site, aplicativo e sistema criados pela RHPS Systems"></video>
-            <button type="button" class="video-sound" aria-pressed="false"><span class="video-sound-icon" aria-hidden="true">🔇</span><span class="video-sound-label">Ativar som</span></button>
-            <div class="video-progress" aria-hidden="true"><span></span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
     <section id="prototipos" class="section">
       <div class="container">
         <div class="section-head reveal">
           <p class="kicker">Protótipos</p>
-          <h2>Teste agora nossos protótipos</h2>
-          <p class="section-lead">Protótipos funcionais criados pela RHPS Systems para você ver na prática como pode ficar o seu projeto. Clique, mexa e teste à vontade: o seu é feito sob medida a partir de uma base assim.</p>
+          <h2>Veja funcionando e <span class="gradient-text">teste você mesmo</span></h2>
+          <p class="section-lead">Protótipos funcionais criados pela RHPS Systems para você ver na prática como pode ficar o seu projeto. Assista ao vídeo ou abra e teste à vontade: o seu é feito sob medida a partir de uma base assim.</p>
         </div>
+        <div id="video" class="video-grid">
+          <div class="video-copy reveal">
+            <p class="video-hint">▶ Veja em 40 segundos ou toque em <strong>Testar</strong> para abrir o protótipo</p>
+            <div class="video-chapters" role="group" aria-label="Exemplos do vídeo">
+            <div class="chapter" data-t="7.5" data-end="15">
+              <button type="button" class="chapter-play" aria-label="Ver Site com agenda online no vídeo"><span class="chapter-icon" aria-hidden="true">💈</span><span><strong>Site com agenda online</strong><small>Barbearia · 0:07</small></span></button>
+              <a class="chapter-test" href="prototipos/barbearia/">Testar <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="chapter" data-t="15" data-end="22.5">
+              <button type="button" class="chapter-play" aria-label="Ver App de delivery no vídeo"><span class="chapter-icon" aria-hidden="true">🍔</span><span><strong>App de delivery</strong><small>Hamburgueria · 0:15</small></span></button>
+              <a class="chapter-test" href="prototipos/delivery/">Testar <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="chapter" data-t="22.5" data-end="30">
+              <button type="button" class="chapter-play" aria-label="Ver Sistema de vendas (CRM) no vídeo"><span class="chapter-icon" aria-hidden="true">📊</span><span><strong>Sistema de vendas (CRM)</strong><small>Painel e funil · 0:22</small></span></button>
+              <a class="chapter-test" href="prototipos/crm/">Testar <span aria-hidden="true">→</span></a>
+            </div>
+            </div>
+            <div class="video-actions">
+              <a class="btn btn-whatsapp" href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Vi%20os%20prot%C3%B3tipos%20no%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Quero um assim</a>
+            </div>
+          </div>
+          <div class="video-stage reveal">
+            <div class="video-glow" aria-hidden="true"></div>
+            <span class="video-chip video-chip-1" aria-hidden="true">▶ 3 exemplos reais</span>
+            <span class="video-chip video-chip-2" aria-hidden="true">✦ Feito sob medida</span>
+            <div class="video-phone">
+              <video id="promo-video" src="assets/video/rhps-propaganda.mp4" poster="assets/video/rhps-propaganda-capa.jpg" muted loop playsinline preload="none" width="720" height="1280" aria-label="Vídeo com exemplos de site, aplicativo e sistema criados pela RHPS Systems"></video>
+              <button type="button" class="video-sound" aria-pressed="false"><span class="video-sound-icon" aria-hidden="true">🔇</span><span class="video-sound-label">Ativar som</span></button>
+              <div class="video-progress" aria-hidden="true"><span></span></div>
+            </div>
+          </div>
+        </div>
+
+        <p class="demos-label reveal">Todos os protótipos <span>· 8 exemplos para testar</span></p>
         <div class="demos">
           <a class="demo reveal" href="prototipos/barbearia/" style="--accent: #d4a24c">
             <div class="demo-shot"><img src="assets/portfolio/barbearia.jpg" alt="Site da Barbearia Navalha com agendamento online" width="800" height="500" loading="lazy"></div>
@@ -379,12 +384,48 @@
               <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
             </div>
           </a>
+          <a class="demo reveal" href="prototipos/clinica/" style="--accent: #2dd4bf">
+            <div class="demo-shot"><img src="assets/portfolio/clinica.jpg" alt="Site da Clínica Vitta com agendamento de consultas" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Site · Agenda de consultas</span>
+              <h3>Clínica Vitta</h3>
+              <p>Site para clínica: o paciente escolhe especialidade, profissional, convênio e horário, e recebe a confirmação.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <a class="demo reveal" href="prototipos/salao/" style="--accent: #f4a6c0">
+            <div class="demo-shot"><img src="assets/portfolio/salao.jpg" alt="Site do salão Studio Bella com agendamento de serviços" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Site · Salão de beleza</span>
+              <h3>Studio Bella</h3>
+              <p>A cliente monta o combo de serviços com desconto, escolhe a profissional e agenda. Tem pacotes e cartão fidelidade.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
           <a class="demo reveal" href="prototipos/delivery/" style="--accent: #ff5a1f">
             <div class="demo-shot"><img src="assets/portfolio/delivery.jpg" alt="Aplicativo de delivery da Brasa Burger" width="800" height="500" loading="lazy"></div>
             <div class="demo-body">
               <span class="slide-tag">Aplicativo · Delivery</span>
               <h3>Brasa Burger</h3>
               <p>App de pedidos para hamburgueria: cardápio, sacola, pagamento por Pix e acompanhamento da entrega.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <a class="demo reveal" href="prototipos/loja/" style="--accent: #e59a4b">
+            <div class="demo-shot"><img src="assets/portfolio/loja.jpg" alt="Loja virtual Grão Nobre com carrinho e frete" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Loja virtual · E-commerce</span>
+              <h3>Grão Nobre</h3>
+              <p>Loja com busca, carrinho, cálculo de frete, cupom de desconto e pagamento por Pix ou cartão.</p>
+              <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+          <a class="demo reveal" href="prototipos/academia/" style="--accent: #c6ff3d">
+            <div class="demo-shot"><img src="assets/portfolio/academia.jpg" alt="Site da academia Pulse Fit com planos e grade de aulas" width="800" height="500" loading="lazy"></div>
+            <div class="demo-body">
+              <span class="slide-tag">Site · Academia</span>
+              <h3>Pulse Fit</h3>
+              <p>Planos mensal e anual, grade de aulas com reserva de vaga, aula experimental e calculadora de IMC.</p>
               <span class="demo-link">Abrir protótipo <span aria-hidden="true">→</span></span>
             </div>
           </a>
@@ -476,6 +517,36 @@
             <p class="price-desc">Gestão, agendamentos, estoque, financeiro e mais.</p>
             <p class="price-value"><small>a partir de</small> R$ 5.000</p>
           </article>
+        </div>
+        <div id="orcamento" class="estimator reveal">
+          <div class="est-head">
+            <p class="kicker">Orçamento rápido</p>
+            <h3>Conte rapidinho o que você precisa</h3>
+            <p>Marque as opções e mande o resumo pronto no WhatsApp. Leva menos de 1 minuto.</p>
+          </div>
+          <div class="est-grid">
+            <div class="est-steps">
+              <fieldset class="est-step">
+                <legend><span>1</span> O que você precisa?</legend>
+                <div class="est-types" id="est-types"></div>
+              </fieldset>
+              <fieldset class="est-step">
+                <legend><span>2</span> O que não pode faltar? <small>(opcional)</small></legend>
+                <div class="est-feats" id="est-feats"></div>
+              </fieldset>
+              <fieldset class="est-step">
+                <legend><span>3</span> Sobre o seu negócio</legend>
+                <label class="est-field"><span>Qual é o seu negócio?</span><input id="est-biz" type="text" maxlength="60" placeholder="Ex.: pizzaria, clínica, loja de roupas"></label>
+                <label class="est-field"><span>Quer contar mais alguma coisa? <small>(opcional)</small></span><textarea id="est-notes" rows="3" maxlength="400" placeholder="Ex.: quero que o cliente consiga agendar pelo celular"></textarea></label>
+              </fieldset>
+            </div>
+            <aside class="est-result" aria-live="polite">
+              <p class="est-label">Seu resumo</p>
+              <ul class="est-list" id="est-list"></ul>
+              <a class="btn btn-whatsapp est-send" id="est-send" href="https://wa.me/5517992440805" target="_blank" rel="noopener">Enviar no WhatsApp</a>
+              <p class="est-note">Eu respondo com o orçamento, sem compromisso.</p>
+            </aside>
+          </div>
         </div>
         <p class="prices-note reveal">O orçamento é sempre gratuito e sem compromisso. <a href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Peça o seu no WhatsApp →</a></p>
       </div>
@@ -609,7 +680,7 @@
       soundBtn.querySelector('.video-sound-label').textContent = promo.muted ? 'Ativar som' : 'Som ligado';
     });
     const seek = (t) => { promo.currentTime = t; promo.play().catch(() => {}); };
-    chapters.forEach((c) => c.addEventListener('click', () => {
+    chapters.forEach((c) => c.querySelector('.chapter-play').addEventListener('click', () => {
       const t = Number(c.dataset.t);
       if (promo.readyState >= 1) seek(t);
       else { promo.addEventListener('loadedmetadata', () => seek(t), { once: true }); promo.load(); }
@@ -619,6 +690,72 @@
       if (promo.duration) progress.style.width = `${(t / promo.duration) * 100}%`;
       chapters.forEach((c) => c.classList.toggle('active', t >= Number(c.dataset.t) && t < Number(c.dataset.end)));
     });
+
+    // Orçamento rápido: monta um resumo e manda para o WhatsApp
+    const estTypes = [
+      { id: 'site', name: 'Site', icon: '🌐' },
+      { id: 'loja', name: 'Loja virtual', icon: '🛒' },
+      { id: 'app', name: 'Aplicativo', icon: '📱' },
+      { id: 'sistema', name: 'Sistema', icon: '⚙️' },
+      { id: 'duvida', name: 'Ainda não sei', icon: '💬' },
+    ];
+    const estFeats = ['Agendamento online', 'Pagamento online', 'Área do cliente', 'Painel para administrar', 'Integração com WhatsApp', 'Relatórios', 'Logo e identidade visual'];
+    const est = { type: 'site', feats: new Set() };
+    const $est = (id) => document.getElementById(id);
+
+    $est('est-types').innerHTML = estTypes.map((t) => `
+      <button type="button" class="est-type" data-type="${t.id}" aria-pressed="false">
+        <span class="est-icon" aria-hidden="true">${t.icon}</span><span>${t.name}</span>
+      </button>`).join('');
+    $est('est-feats').innerHTML = estFeats.map((f, i) => `
+      <button type="button" class="est-feat" data-feat="${i}" aria-pressed="false"><span class="est-check" aria-hidden="true"></span>${f}</button>`).join('');
+
+    function renderEstimator() {
+      document.querySelectorAll('.est-type').forEach((b) => {
+        const on = b.dataset.type === est.type;
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on);
+      });
+      document.querySelectorAll('.est-feat').forEach((b) => {
+        const on = est.feats.has(Number(b.dataset.feat));
+        b.classList.toggle('on', on);
+        b.setAttribute('aria-pressed', on);
+      });
+      const type = estTypes.find((t) => t.id === est.type);
+      const chosen = estFeats.filter((f, i) => est.feats.has(i));
+      const biz = $est('est-biz').value.trim();
+      const notes = $est('est-notes').value.trim();
+      const what = est.type === 'duvida' ? 'Ainda não sei o que preciso' : type.name;
+
+      $est('est-list').innerHTML = [
+        `<li><b>${what}</b></li>`,
+        biz ? `<li>Para: ${biz.replace(/</g, '&lt;')}</li>` : '',
+        ...chosen.map((f) => `<li>${f}</li>`),
+      ].join('');
+
+      const msg = [
+        'Olá! Vim pelo site da RHPS Systems.',
+        `• Preciso de: ${what}${biz ? ` para ${biz}` : ''}`,
+        chosen.length ? `• Com: ${chosen.join(', ')}` : null,
+        notes ? `• Detalhes: ${notes}` : null,
+        'Pode me passar um orçamento?',
+      ].filter(Boolean).join('\n');
+      $est('est-send').href = `https://wa.me/5517992440805?text=${encodeURIComponent(msg)}`;
+    }
+
+    document.querySelector('.estimator').addEventListener('click', (e) => {
+      const b = e.target.closest('[data-type],[data-feat]');
+      if (!b) return;
+      if (b.dataset.type) est.type = b.dataset.type;
+      if (b.dataset.feat) {
+        const i = Number(b.dataset.feat);
+        est.feats.has(i) ? est.feats.delete(i) : est.feats.add(i);
+      }
+      renderEstimator();
+    });
+    $est('est-biz').addEventListener('input', renderEstimator);
+    $est('est-notes').addEventListener('input', renderEstimator);
+    renderEstimator();
 
     // Carrossel de exemplos
     const track = document.querySelector('.carousel-track');

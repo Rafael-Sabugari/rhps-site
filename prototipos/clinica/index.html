@@ -1,0 +1,425 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clínica Vitta | Protótipo RHPS Systems</title>
+  <meta name="description" content="Protótipo da RHPS Systems: site de clínica com agendamento de consultas online.">
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#06191c">
+  <link rel="icon" href="../../assets/logo.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../demo-bar.css">
+  <style>
+    :root {
+      --bg: #06191c;
+      --bg-2: #0a2226;
+      --card: #0e2b30;
+      --line: rgba(160, 240, 230, 0.12);
+      --text: #e8f6f3;
+      --muted: #8fb3ad;
+      --teal: #2dd4bf;
+      --teal-2: #99f6e4;
+      --rose: #fda4af;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin: 0; font-family: "Manrope", system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; color: inherit; }
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 20px; }
+    h1, h2, h3 { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
+
+    header { position: sticky; top: 0; z-index: 20; background: rgba(6, 25, 28, 0.85); backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); }
+    .nav { display: flex; align-items: center; justify-content: space-between; height: 70px; }
+    .logo { display: flex; align-items: center; gap: 10px; font-family: "Fraunces"; font-size: 1.45rem; font-weight: 600; }
+    .logo i { width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center; background: linear-gradient(135deg, var(--teal), #0ea5e9); color: #04201c; font-style: normal; font-family: "Manrope"; font-weight: 800; }
+    .links { display: flex; gap: 28px; font-size: 0.95rem; color: var(--muted); }
+    .links a:hover { color: var(--text); }
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; padding: 13px 24px; border-radius: 14px; background: var(--teal); color: #04201c; font-weight: 700; border: 0; cursor: pointer; font-size: 0.95rem; transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 14px 30px -12px rgba(45, 212, 191, 0.7); }
+    .btn.ghost { background: transparent; color: var(--text); border: 1px solid var(--line); }
+    .btn:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+
+    .hero { position: relative; overflow: hidden; padding: 96px 0 104px; }
+    .hero::before { content: ""; position: absolute; inset: 0; background:
+      radial-gradient(520px 380px at 85% 20%, rgba(45, 212, 191, 0.2), transparent 70%),
+      radial-gradient(420px 320px at 10% 90%, rgba(14, 165, 233, 0.14), transparent 70%); }
+    .hero .wrap { position: relative; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: center; }
+    .pill { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; border-radius: 999px; background: rgba(45, 212, 191, 0.1); border: 1px solid rgba(45, 212, 191, 0.3); color: var(--teal-2); font-size: 0.85rem; font-weight: 600; }
+    .hero h1 { font-size: clamp(2.6rem, 5.6vw, 4.4rem); margin: 18px 0 18px; }
+    .hero h1 em { font-style: italic; color: var(--teal); }
+    .hero p { color: var(--muted); font-size: 1.1rem; max-width: 500px; margin: 0 0 30px; }
+    .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+    .trust { display: flex; gap: 30px; margin-top: 38px; color: var(--muted); font-size: 0.88rem; }
+    .trust b { display: block; color: var(--text); font-size: 1.5rem; font-family: "Fraunces"; }
+
+    .next { background: var(--card); border: 1px solid var(--line); border-radius: 26px; padding: 26px; box-shadow: 0 40px 80px -40px rgba(0, 0, 0, 0.8); }
+    .next-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .next-head span { color: var(--muted); font-size: 0.85rem; }
+    .live { display: inline-flex; align-items: center; gap: 6px; color: var(--teal-2) !important; font-weight: 600; }
+    .live::before { content: ""; width: 8px; height: 8px; border-radius: 50%; background: var(--teal); box-shadow: 0 0 0 4px rgba(45, 212, 191, 0.2); animation: pulse 1.6s infinite; }
+    @keyframes pulse { 50% { box-shadow: 0 0 0 8px rgba(45, 212, 191, 0); } }
+    .slot { display: flex; align-items: center; gap: 14px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); margin-bottom: 10px; background: var(--bg-2); }
+    .slot .av { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; font-weight: 800; color: #04201c; flex: none; }
+    .slot div { flex: 1; min-width: 0; }
+    .slot small { display: block; color: var(--muted); font-size: 0.8rem; }
+    .slot .time { flex: none; padding: 6px 10px; border-radius: 10px; background: rgba(45, 212, 191, 0.12); color: var(--teal-2); font-weight: 700; font-size: 0.85rem; }
+
+    section { padding: 90px 0; }
+    .head { text-align: center; margin: 0 auto 46px; max-width: 620px; }
+    .eyebrow { color: var(--teal); font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.78rem; }
+    .head h2 { font-size: clamp(2rem, 4vw, 2.9rem); margin: 10px 0 10px; }
+    .head p { color: var(--muted); margin: 0; }
+
+    .specs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .spec { background: var(--card); border: 1px solid var(--line); border-radius: 20px; padding: 24px; transition: transform 0.2s, border-color 0.2s; }
+    .spec:hover { transform: translateY(-4px); border-color: rgba(45, 212, 191, 0.45); }
+    .spec .ic { font-size: 1.7rem; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; background: rgba(45, 212, 191, 0.1); }
+    .spec h3 { font-size: 1.25rem; margin: 16px 0 6px; }
+    .spec p { color: var(--muted); font-size: 0.92rem; margin: 0; }
+
+    .booking { background: var(--bg-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .steps { display: flex; justify-content: center; gap: 8px; margin-bottom: 30px; flex-wrap: wrap; }
+    .stp { display: flex; align-items: center; gap: 8px; padding: 8px 14px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); font-size: 0.85rem; font-weight: 600; }
+    .stp b { width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; background: var(--card); font-size: 0.75rem; }
+    .stp.on { color: var(--text); border-color: rgba(45, 212, 191, 0.5); }
+    .stp.on b, .stp.ok b { background: var(--teal); color: #04201c; }
+    .book { display: grid; grid-template-columns: 1.35fr 0.65fr; gap: 24px; align-items: start; }
+    .panel { background: var(--card); border: 1px solid var(--line); border-radius: 24px; padding: 28px; }
+    .panel h3 { font-size: 1.35rem; margin-bottom: 18px; }
+    .pane { display: none; }
+    .pane.on { display: block; animation: fade 0.3s ease; }
+    @keyframes fade { from { opacity: 0; transform: translateY(6px); } }
+    .grid2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .opt { display: flex; align-items: center; gap: 12px; padding: 14px; border-radius: 16px; border: 1px solid var(--line); background: transparent; text-align: left; cursor: pointer; transition: all 0.15s; }
+    .opt:hover { border-color: rgba(45, 212, 191, 0.45); }
+    .opt.on { border-color: var(--teal); background: rgba(45, 212, 191, 0.08); }
+    .opt .ic { font-size: 1.4rem; }
+    .opt small { display: block; color: var(--muted); font-size: 0.8rem; }
+    .doc { display: flex; align-items: center; gap: 14px; }
+    .doc .av { width: 50px; height: 50px; border-radius: 16px; display: grid; place-items: center; font-weight: 800; color: #04201c; flex: none; }
+    .stars { color: #fbbf24; font-size: 0.8rem; }
+    .label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); margin: 22px 0 10px; font-weight: 700; }
+    .label:first-child { margin-top: 0; }
+    .toggle { display: inline-flex; padding: 4px; border-radius: 14px; background: var(--bg-2); border: 1px solid var(--line); }
+    .toggle button { padding: 9px 16px; border-radius: 10px; border: 0; background: none; cursor: pointer; color: var(--muted); font-weight: 600; }
+    .toggle button.on { background: var(--teal); color: #04201c; }
+    select, input { width: 100%; padding: 13px 14px; border-radius: 14px; border: 1px solid var(--line); background: var(--bg-2); color: var(--text); font: inherit; }
+    select:focus, input:focus { outline: 2px solid var(--teal); outline-offset: 1px; }
+    .days { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+    .day { padding: 10px 0; border-radius: 14px; border: 1px solid var(--line); background: transparent; cursor: pointer; text-align: center; }
+    .day small { display: block; font-size: 0.7rem; color: var(--muted); text-transform: uppercase; }
+    .day b { font-size: 1.15rem; }
+    .day.on { background: var(--teal); border-color: var(--teal); color: #04201c; }
+    .day.on small { color: #0b4a42; }
+    .times { display: flex; flex-wrap: wrap; gap: 8px; }
+    .time { padding: 9px 14px; border-radius: 12px; border: 1px solid var(--line); background: transparent; cursor: pointer; font-weight: 600; font-size: 0.9rem; }
+    .time.on { background: var(--teal); color: #04201c; border-color: var(--teal); }
+    .time:disabled { opacity: 0.28; cursor: not-allowed; text-decoration: line-through; }
+    .fields { display: grid; gap: 12px; }
+    .nav-btns { display: flex; justify-content: space-between; gap: 10px; margin-top: 26px; }
+    .sum div { display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line); color: var(--muted); font-size: 0.92rem; }
+    .sum b { color: var(--text); text-align: right; }
+    .sum .price { font-family: "Fraunces"; font-size: 2rem; color: var(--teal); margin: 16px 0 0; }
+    .note { color: var(--muted); font-size: 0.82rem; margin: 12px 0 0; }
+    .done { text-align: center; padding: 20px 0 6px; }
+    .done .check { width: 76px; height: 76px; border-radius: 50%; margin: 0 auto 16px; background: var(--teal); color: #04201c; display: grid; place-items: center; font-size: 2.2rem; font-weight: 800; animation: pop 0.4s ease; }
+    @keyframes pop { from { transform: scale(0.6); opacity: 0; } }
+    .ticket { margin: 20px auto 0; max-width: 380px; text-align: left; border: 1px dashed rgba(45, 212, 191, 0.4); border-radius: 18px; padding: 18px; background: var(--bg-2); }
+    .ticket div { display: flex; justify-content: space-between; padding: 5px 0; color: var(--muted); font-size: 0.9rem; }
+    .ticket b { color: var(--text); }
+
+    .team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .member { background: var(--card); border: 1px solid var(--line); border-radius: 22px; padding: 22px; text-align: center; }
+    .member .ph { width: 92px; height: 92px; margin: 0 auto 14px; border-radius: 30px; display: grid; place-items: center; font-family: "Fraunces"; font-size: 2rem; color: #04201c; }
+    .member h3 { font-size: 1.15rem; }
+    .member p { color: var(--muted); font-size: 0.85rem; margin: 4px 0 0; }
+
+    .faq { max-width: 760px; margin: 0 auto; display: grid; gap: 10px; }
+    details { background: var(--card); border: 1px solid var(--line); border-radius: 18px; padding: 18px 22px; }
+    summary { cursor: pointer; font-weight: 700; list-style: none; display: flex; justify-content: space-between; }
+    summary::after { content: "+"; color: var(--teal); font-size: 1.3rem; line-height: 1; }
+    details[open] summary::after { content: "–"; }
+    details p { color: var(--muted); margin: 10px 0 0; }
+
+    footer { padding: 34px 0 110px; text-align: center; color: var(--muted); font-size: 0.85rem; border-top: 1px solid var(--line); }
+
+    @media (max-width: 900px) {
+      .links { display: none; }
+      .hero { padding: 56px 0 70px; }
+      .hero .wrap, .book { grid-template-columns: 1fr; }
+      .specs, .team { grid-template-columns: repeat(2, 1fr); }
+      section { padding: 64px 0; }
+    }
+    @media (max-width: 560px) {
+      .nav .btn { padding: 10px 16px; }
+      .grid2 { grid-template-columns: 1fr; }
+      .days { grid-template-columns: repeat(3, 1fr); }
+      .trust { gap: 20px; }
+      .panel { padding: 20px; }
+      .stp span { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap nav">
+      <a href="#" class="logo"><i>V</i>Clínica Vitta</a>
+      <nav class="links"><a href="#especialidades">Especialidades</a><a href="#agendar">Agendar</a><a href="#equipe">Equipe</a><a href="#duvidas">Dúvidas</a></nav>
+      <a href="#agendar" class="btn">Agendar consulta</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <span class="pill">🩺 Atendimento humanizado</span>
+        <h1>Cuidar de você, <em>sem fila</em> e sem complicação.</h1>
+        <p>Marque sua consulta online em menos de um minuto, escolha o profissional e receba a confirmação no WhatsApp.</p>
+        <div class="hero-actions">
+          <a href="#agendar" class="btn">Agendar agora</a>
+          <a href="#especialidades" class="btn ghost">Ver especialidades</a>
+        </div>
+        <div class="trust">
+          <div><b>4.9★</b>no Google</div>
+          <div><b>8</b>especialidades</div>
+          <div><b>12</b>convênios</div>
+        </div>
+      </div>
+      <div class="next" aria-hidden="true">
+        <div class="next-head"><b>Horários livres hoje</b><span class="live">ao vivo</span></div>
+        <div class="slot"><span class="av" style="background:#2dd4bf">AM</span><div><b>Dra. Ana Moura</b><small>Clínica geral</small></div><span class="time">14:30</span></div>
+        <div class="slot"><span class="av" style="background:#fda4af">JR</span><div><b>Dr. João Ribeiro</b><small>Cardiologia</small></div><span class="time">15:00</span></div>
+        <div class="slot"><span class="av" style="background:#93c5fd">LC</span><div><b>Dra. Luiza Campos</b><small>Dermatologia</small></div><span class="time">16:15</span></div>
+        <div class="slot" style="margin:0"><span class="av" style="background:#fcd34d">PS</span><div><b>Dr. Paulo Santos</b><small>Ortopedia</small></div><span class="time">17:00</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="especialidades">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Especialidades</span><h2>Tudo em um só lugar</h2><p>Consultas, exames e retorno no mesmo endereço, com prontuário digital.</p></div>
+      <div class="specs" id="specs"></div>
+    </div>
+  </section>
+
+  <section id="agendar" class="booking">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Agendamento online</span><h2>Marque sua consulta</h2><p>Escolha, confirme e pronto. Você recebe o lembrete no WhatsApp um dia antes.</p></div>
+      <div class="steps" id="steps">
+        <div class="stp"><b>1</b><span>Especialidade</span></div>
+        <div class="stp"><b>2</b><span>Profissional</span></div>
+        <div class="stp"><b>3</b><span>Data e hora</span></div>
+        <div class="stp"><b>4</b><span>Seus dados</span></div>
+      </div>
+      <div class="book">
+        <div class="panel">
+          <div class="pane" data-pane="0">
+            <h3>Qual especialidade você procura?</h3>
+            <div class="grid2" id="specOpts"></div>
+          </div>
+          <div class="pane" data-pane="1">
+            <h3>Escolha o profissional</h3>
+            <div class="grid2" id="docOpts"></div>
+            <p class="label">Forma de atendimento</p>
+            <div class="toggle" id="payToggle">
+              <button type="button" data-pay="particular" class="on">Particular</button>
+              <button type="button" data-pay="convenio">Convênio</button>
+            </div>
+            <div id="planWrap" style="display:none;margin-top:12px">
+              <select id="plan" aria-label="Convênio">
+                <option>Unimed</option><option>Bradesco Saúde</option><option>SulAmérica</option><option>Amil</option><option>Hapvida</option>
+              </select>
+            </div>
+          </div>
+          <div class="pane" data-pane="2">
+            <h3>Quando fica melhor para você?</h3>
+            <p class="label">Dia</p>
+            <div class="days" id="days"></div>
+            <p class="label">Horário</p>
+            <div class="times" id="times"></div>
+          </div>
+          <div class="pane" data-pane="3">
+            <h3>Seus dados</h3>
+            <div class="fields">
+              <input id="name" placeholder="Nome completo" autocomplete="name">
+              <input id="phone" placeholder="WhatsApp (17) 99999-9999" inputmode="tel" autocomplete="tel">
+              <input id="obs" placeholder="Motivo da consulta (opcional)">
+            </div>
+            <p class="note">🔒 Seus dados ficam protegidos conforme a LGPD.</p>
+          </div>
+          <div class="pane" data-pane="4">
+            <div class="done">
+              <div class="check">✓</div>
+              <h3>Consulta agendada!</h3>
+              <p style="color:var(--muted);margin:8px 0 0">Enviamos a confirmação para o seu WhatsApp.</p>
+              <div class="ticket" id="ticket"></div>
+              <button class="btn ghost" id="again" style="margin-top:20px">Agendar outra consulta</button>
+            </div>
+          </div>
+          <div class="nav-btns" id="navBtns">
+            <button class="btn ghost" id="back">← Voltar</button>
+            <button class="btn" id="next">Continuar →</button>
+          </div>
+        </div>
+        <aside class="panel sum">
+          <h3>Resumo</h3>
+          <div>Especialidade <b id="sSpec">—</b></div>
+          <div>Profissional <b id="sDoc">—</b></div>
+          <div>Atendimento <b id="sPay">Particular</b></div>
+          <div>Data <b id="sDate">—</b></div>
+          <p class="price" id="sPrice">—</p>
+          <p class="note" id="sNote">Valor da consulta particular.</p>
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <section id="equipe">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Equipe</span><h2>Quem vai cuidar de você</h2></div>
+      <div class="team" id="team"></div>
+    </div>
+  </section>
+
+  <section id="duvidas" class="booking">
+    <div class="wrap">
+      <div class="head"><span class="eyebrow">Dúvidas</span><h2>Perguntas frequentes</h2></div>
+      <div class="faq">
+        <details open><summary>Posso remarcar pelo site?</summary><p>Sim. O link de confirmação que chega no WhatsApp tem a opção de remarcar ou cancelar sem precisar ligar.</p></details>
+        <details><summary>Quais convênios vocês aceitam?</summary><p>Unimed, Bradesco Saúde, SulAmérica, Amil, Hapvida e outros. Escolha "Convênio" no agendamento para ver a lista.</p></details>
+        <details><summary>Tem estacionamento?</summary><p>Sim, estacionamento gratuito para pacientes durante a consulta.</p></details>
+        <details><summary>Fazem teleconsulta?</summary><p>Sim, para retornos e algumas especialidades. O link da chamada é enviado 15 minutos antes.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <footer>Clínica Vitta é um negócio fictício, criado como protótipo.</footer>
+
+  <script src="../demo-bar.js" data-kind="um site com agenda como este"></script>
+  <script>
+    const SPECS = [
+      { id: 'geral', ic: '🩺', name: 'Clínica geral', desc: 'Check-up, prevenção e primeiro atendimento.', price: 180 },
+      { id: 'cardio', ic: '❤️', name: 'Cardiologia', desc: 'Consulta, eletro e acompanhamento.', price: 280 },
+      { id: 'derma', ic: '✨', name: 'Dermatologia', desc: 'Pele, cabelo e unhas.', price: 260 },
+      { id: 'orto', ic: '🦴', name: 'Ortopedia', desc: 'Dores, lesões e coluna.', price: 250 },
+      { id: 'pedi', ic: '🧸', name: 'Pediatria', desc: 'Do recém-nascido ao adolescente.', price: 220 },
+      { id: 'gine', ic: '🌸', name: 'Ginecologia', desc: 'Saúde da mulher em todas as fases.', price: 240 },
+      { id: 'nutri', ic: '🥗', name: 'Nutrição', desc: 'Reeducação alimentar e dietas.', price: 160 },
+      { id: 'psico', ic: '🧠', name: 'Psicologia', desc: 'Terapia presencial ou online.', price: 170 },
+    ];
+    const DOCS = [
+      { name: 'Dra. Ana Moura', spec: ['geral', 'pedi'], crm: 'CRM 12345', color: '#2dd4bf', rate: '4.9' },
+      { name: 'Dr. João Ribeiro', spec: ['cardio', 'geral'], crm: 'CRM 23456', color: '#fda4af', rate: '5.0' },
+      { name: 'Dra. Luiza Campos', spec: ['derma', 'gine'], crm: 'CRM 34567', color: '#93c5fd', rate: '4.9' },
+      { name: 'Dr. Paulo Santos', spec: ['orto'], crm: 'CRM 45678', color: '#fcd34d', rate: '4.8' },
+      { name: 'Dra. Beatriz Lima', spec: ['pedi', 'gine'], crm: 'CRM 56789', color: '#c4b5fd', rate: '5.0' },
+      { name: 'Marina Duarte', spec: ['nutri'], crm: 'CRN 6789', color: '#86efac', rate: '4.9' },
+      { name: 'Rafael Nunes', spec: ['psico'], crm: 'CRP 7890', color: '#fdba74', rate: '5.0' },
+      { name: 'Dr. Carlos Teixeira', spec: ['cardio', 'orto'], crm: 'CRM 67890', color: '#67e8f9', rate: '4.8' },
+    ];
+    const TIMES = ['08:00', '08:45', '09:30', '10:15', '11:00', '13:30', '14:15', '15:00', '15:45', '16:30', '17:15'];
+    const initials = (n) => n.replace(/^(Dra?\.)\s/, '').split(' ').map((p) => p[0]).slice(0, 2).join('');
+    const brl = (v) => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+    const $ = (id) => document.getElementById(id);
+    const st = { step: 0, spec: null, doc: null, pay: 'particular', day: null, time: null };
+
+    $('specs').innerHTML = SPECS.map((s) => `<article class="spec"><div class="ic">${s.ic}</div><h3>${s.name}</h3><p>${s.desc}</p></article>`).join('');
+    $('team').innerHTML = DOCS.slice(0, 4).map((d) => `<article class="member"><div class="ph" style="background:${d.color}">${initials(d.name)}</div><h3>${d.name}</h3><p>${SPECS.find((s) => s.id === d.spec[0]).name} · ${d.crm}</p></article>`).join('');
+    $('specOpts').innerHTML = SPECS.map((s) => `<button type="button" class="opt" data-spec="${s.id}"><span class="ic">${s.ic}</span><span><b>${s.name}</b><small>a partir de ${brl(s.price)}</small></span></button>`).join('');
+
+    const week = ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'];
+    const days = [];
+    for (let n = 1; days.length < 6; n++) {
+      const d = new Date(); d.setDate(d.getDate() + n);
+      if (d.getDay() !== 0) days.push(d);
+    }
+    $('days').innerHTML = days.map((d, i) => `<button type="button" class="day" data-day="${i}"><small>${week[d.getDay()]}</small><b>${d.getDate()}</b></button>`).join('');
+
+    // Horários ocupados variam por profissional e dia, sempre do mesmo jeito
+    const busy = (doc, day, t) => (doc * 5 + day * 3 + t * 7) % 3 === 0;
+
+    function renderDocs() {
+      const list = DOCS.map((d, i) => ({ ...d, i })).filter((d) => d.spec.includes(st.spec));
+      $('docOpts').innerHTML = list.map((d) => `<button type="button" class="opt doc ${st.doc === d.i ? 'on' : ''}" data-doc="${d.i}"><span class="av" style="background:${d.color}">${initials(d.name)}</span><span><b>${d.name}</b><small>${d.crm} · <span class="stars">★</span> ${d.rate}</small></span></button>`).join('');
+    }
+    function renderTimes() {
+      $('times').innerHTML = TIMES.map((t, i) => {
+        const off = st.day === null || busy(st.doc, st.day, i);
+        return `<button type="button" class="time ${st.time === t ? 'on' : ''}" data-time="${t}" ${off ? 'disabled' : ''}>${t}</button>`;
+      }).join('');
+    }
+    function canNext() {
+      if (st.step === 0) return !!st.spec;
+      if (st.step === 1) return st.doc !== null;
+      if (st.step === 2) return !!st.time;
+      if (st.step === 3) return $('name').value.trim().length > 2 && $('phone').value.replace(/\D/g, '').length >= 10;
+      return false;
+    }
+    function render() {
+      document.querySelectorAll('.pane').forEach((p) => p.classList.toggle('on', Number(p.dataset.pane) === st.step));
+      document.querySelectorAll('.stp').forEach((s, i) => { s.classList.toggle('on', i === st.step); s.classList.toggle('ok', i < st.step); });
+      document.querySelectorAll('[data-spec]').forEach((b) => b.classList.toggle('on', b.dataset.spec === st.spec));
+      document.querySelectorAll('[data-day]').forEach((b) => b.classList.toggle('on', Number(b.dataset.day) === st.day));
+      document.querySelectorAll('[data-pay]').forEach((b) => b.classList.toggle('on', b.dataset.pay === st.pay));
+      if (st.step === 1) renderDocs();
+      if (st.step === 2) renderTimes();
+      $('navBtns').style.display = st.step === 4 ? 'none' : '';
+      $('back').style.visibility = st.step === 0 ? 'hidden' : 'visible';
+      $('next').textContent = st.step === 3 ? 'Confirmar consulta' : 'Continuar →';
+      $('next').disabled = !canNext();
+
+      const spec = SPECS.find((s) => s.id === st.spec);
+      const day = st.day !== null ? days[st.day] : null;
+      $('sSpec').textContent = spec ? spec.name : '—';
+      $('sDoc').textContent = st.doc !== null ? DOCS[st.doc].name : '—';
+      $('sPay').textContent = st.pay === 'convenio' ? $('plan').value : 'Particular';
+      $('sDate').textContent = day && st.time ? `${day.toLocaleDateString('pt-BR', { weekday: 'short', day: '2-digit', month: '2-digit' })} às ${st.time}` : '—';
+      $('sPrice').textContent = spec ? (st.pay === 'convenio' ? 'Coberto' : brl(spec.price)) : '—';
+      $('sNote').textContent = st.pay === 'convenio' ? 'Leve a carteirinha do convênio e um documento com foto.' : 'Valor da consulta particular. Aceitamos Pix e cartão.';
+    }
+
+    document.addEventListener('click', (e) => {
+      const b = e.target.closest('[data-spec],[data-doc],[data-day],[data-time],[data-pay]');
+      if (!b || b.disabled) return;
+      if (b.dataset.spec) { st.spec = b.dataset.spec; st.doc = null; st.time = null; }
+      if (b.dataset.doc) { st.doc = Number(b.dataset.doc); st.time = null; renderDocs(); }
+      if (b.dataset.day) { st.day = Number(b.dataset.day); st.time = null; }
+      if (b.dataset.time) st.time = b.dataset.time;
+      if (b.dataset.pay) { st.pay = b.dataset.pay; $('planWrap').style.display = st.pay === 'convenio' ? '' : 'none'; }
+      render();
+    });
+    ['name', 'phone', 'plan'].forEach((id) => $(id).addEventListener('input', render));
+    $('plan').addEventListener('change', render);
+    $('phone').addEventListener('input', (e) => {
+      const d = e.target.value.replace(/\D/g, '').slice(0, 11);
+      e.target.value = d.length > 6 ? `(${d.slice(0, 2)}) ${d.slice(2, 7)}-${d.slice(7)}` : d.length > 2 ? `(${d.slice(0, 2)}) ${d.slice(2)}` : d;
+      render();
+    });
+    $('back').addEventListener('click', () => { st.step = Math.max(0, st.step - 1); render(); });
+    $('next').addEventListener('click', () => {
+      if (!canNext()) return;
+      if (st.step === 3) {
+        $('ticket').innerHTML = `
+          <div>Paciente <b>${$('name').value.trim().split(' ')[0]}</b></div>
+          <div>Especialidade <b>${$('sSpec').textContent}</b></div>
+          <div>Profissional <b>${$('sDoc').textContent}</b></div>
+          <div>Quando <b>${$('sDate').textContent}</b></div>
+          <div>Protocolo <b>#VT${String(4821 + st.doc * 13 + (st.day || 0)).padStart(5, '0')}</b></div>`;
+      }
+      st.step += 1;
+      render();
+      document.getElementById('agendar').scrollIntoView({ behavior: 'smooth' });
+    });
+    $('again').addEventListener('click', () => {
+      Object.assign(st, { step: 0, spec: null, doc: null, day: null, time: null });
+      ['name', 'phone', 'obs'].forEach((id) => { $(id).value = ''; });
+      render();
+    });
+    render();
+  </script>
+</body>
+</html>
