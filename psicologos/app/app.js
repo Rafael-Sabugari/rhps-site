@@ -1,4 +1,4 @@
-/* RHPS Consultório: versão de demonstração.
+/* Sessio: versão de demonstração.
    Tudo roda no navegador e os dados ficam salvos só neste aparelho (localStorage). */
 (function () {
   'use strict';
