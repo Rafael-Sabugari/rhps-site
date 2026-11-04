@@ -144,7 +144,7 @@
     .pricing { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; max-width: 820px; }
     .plan { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; display: flex; flex-direction: column; }
     .plan.featured { border: 2px solid var(--primary); box-shadow: 0 20px 40px rgba(91, 91, 214, .14); position: relative; }
-    .plan.featured::before { content: "Preço de fundador"; position: absolute; top: -13px; left: 24px; background: var(--primary); color: #fff; font-size: .75rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
+    .plan.featured::before { content: "Com IA"; position: absolute; top: -13px; left: 24px; background: var(--primary); color: #fff; font-size: .75rem; font-weight: 600; padding: 4px 12px; border-radius: 999px; }
     .price { font-family: var(--display); font-size: 2.4rem; font-weight: 800; margin: 8px 0 2px; }
     .price small { font-size: 1rem; font-weight: 600; color: var(--muted); }
     .price s { font-size: 1.1rem; color: var(--muted); font-weight: 600; margin-right: 6px; }
@@ -319,36 +319,37 @@
         <div class="section-head">
           <span class="eyebrow">Preços</span>
           <h2 id="pre">Um preço justo para quem está construindo o próprio consultório</h2>
-          <p>Os primeiros psicólogos da lista entram no grupo de fundadores e mantêm o preço especial enquanto forem assinantes.</p>
+          <p>Os primeiros psicólogos entram no grupo de fundadores e pagam o preço de fundador enquanto mantiverem a assinatura.</p>
         </div>
         <div class="pricing">
-          <div class="plan featured">
-            <h3>Fundador</h3>
-            <p class="price"><s>R$ 79</s>R$ 59<small>/mês</small></p>
-            <p class="sub">Vagas limitadas para os primeiros assinantes</p>
+          <div class="plan">
+            <h3>Essencial</h3>
+            <p class="price"><s>R$ 49</s>R$ 39<small>/mês</small></p>
+            <p class="sub">Tudo para organizar o consultório</p>
             <ul>
               <li>Pacientes ilimitados</li>
               <li>Agenda, prontuário e financeiro</li>
-              <li>Lembretes no WhatsApp inclusos</li>
-              <li>Acesso antecipado às novidades</li>
-              <li>Canal direto com o desenvolvedor</li>
+              <li>Agendamento online e lista de espera</li>
+              <li>Contrato e ficha de cadastro por link</li>
+              <li>Lembretes no WhatsApp e ditado por voz</li>
+              <li>Recibos e fechamento do mês</li>
             </ul>
-            <a class="btn btn-primary" href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Quero%20garantir%20o%20pre%C3%A7o%20de%20fundador%20do%20RHPS%20Consult%C3%B3rio." target="_blank" rel="noopener">Garantir minha vaga</a>
+            <a class="btn btn-ghost" href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Quero%20garantir%20o%20pre%C3%A7o%20de%20fundador%20do%20Psimeta%20(plano%20Essencial)." target="_blank" rel="noopener">Garantir minha vaga</a>
           </div>
-          <div class="plan">
-            <h3>Clínica</h3>
-            <p class="price">Sob consulta</p>
-            <p class="sub">Para consultórios com mais de um profissional</p>
+          <div class="plan featured">
+            <h3>Completo</h3>
+            <p class="price"><s>R$ 69</s>R$ 49<small>/mês</small></p>
+            <p class="sub">O Essencial, mais a evolução com IA</p>
             <ul>
-              <li>Tudo do plano Fundador</li>
-              <li>Agenda por profissional</li>
-              <li>Prontuários separados e sigilosos</li>
-              <li>Relatórios do consultório</li>
+              <li>Tudo do plano Essencial</li>
+              <li>Evolução organizada pela IA a partir das suas anotações</li>
+              <li>Foto das anotações à mão vira texto</li>
+              <li>Até 150 evoluções com IA por mês, 50 delas com foto</li>
             </ul>
-            <a class="btn btn-ghost" href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Tenho%20um%20consult%C3%B3rio%20com%20mais%20profissionais%20e%20quero%20saber%20do%20plano%20Cl%C3%ADnica." target="_blank" rel="noopener">Falar com a gente</a>
+            <a class="btn btn-primary" href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Quero%20garantir%20o%20pre%C3%A7o%20de%20fundador%20do%20Psimeta%20(plano%20Completo)." target="_blank" rel="noopener">Garantir minha vaga</a>
           </div>
         </div>
-        <p class="note">7 dias grátis para testar. Sem fidelidade: cancele quando quiser.</p>
+        <p class="note">7 dias grátis para testar, com uma evolução com IA de cortesia. No plano anual, você paga 10 meses e usa 12. Sem fidelidade: cancele quando quiser. Consultório com mais de um profissional? <a href="https://wa.me/5517992440805?text=Ol%C3%A1!%20Tenho%20um%20consult%C3%B3rio%20com%20mais%20profissionais%20e%20quero%20saber%20do%20Psimeta." target="_blank" rel="noopener">Fale com a gente</a>.</p>
       </div>
     </section>
 
