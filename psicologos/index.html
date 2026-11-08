@@ -214,6 +214,13 @@
     .topbar-acoes .btn-small { white-space: nowrap; }
     @media (max-width: 420px) { .topbar-acoes { gap: 6px; } .topbar-acoes .btn-small { padding: 9px 11px; font-size: .86rem; } .tema-btn { width: 36px; height: 36px; } }
     @media (max-width: 370px) { .brand span { display: none; } }
+    .hero-inner > * { min-width: 0; }
+    @media (max-width: 320px) {
+      .container { padding: 0 12px; }
+      .topbar-acoes { gap: 4px; }
+      .topbar-acoes .btn-small { padding: 8px 9px; font-size: .8rem; }
+      .tema-btn { width: 34px; height: 34px; }
+    }
     .tema-btn { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; padding: 0; }
     .tema-btn:hover { border-color: var(--primary); color: var(--primary); }
     .tema-btn svg { width: 19px; height: 19px; }

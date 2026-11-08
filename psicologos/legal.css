@@ -38,3 +38,7 @@ html[data-tema="escuro"] mark.fill { background: rgba(251, 191, 36, .25); color:
 .tema-btn svg { width: 18px; height: 18px; }
 .tema-btn .sol, html[data-tema="escuro"] .tema-btn .lua { display: none; }
 html[data-tema="escuro"] .tema-btn .sol { display: block; }
+.top-inner { gap: 12px; }
+.top-acoes a { white-space: nowrap; }
+@media (max-width: 480px) { .top-acoes { gap: 8px; } .top-acoes a { font-size: .85rem; } }
+@media (max-width: 340px) { .brand span { display: none; } }
