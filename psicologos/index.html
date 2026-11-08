@@ -210,7 +210,10 @@
     html[data-tema="escuro"] .cta .btn { color: #4646b8; }
 
     /* Botão de tema (lua / sol) */
-    .topbar-acoes { display: flex; align-items: center; gap: 10px; }
+    .topbar-acoes { display: flex; align-items: center; gap: 8px; }
+    .topbar-acoes .btn-small { white-space: nowrap; }
+    @media (max-width: 420px) { .topbar-acoes { gap: 6px; } .topbar-acoes .btn-small { padding: 9px 11px; font-size: .86rem; } .tema-btn { width: 36px; height: 36px; } }
+    @media (max-width: 370px) { .brand span { display: none; } }
     .tema-btn { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; padding: 0; }
     .tema-btn:hover { border-color: var(--primary); color: var(--primary); }
     .tema-btn svg { width: 19px; height: 19px; }
@@ -244,10 +247,10 @@
         <a href="#seguranca">Segurança</a>
         <a href="#precos">Preços</a>
         <a href="#duvidas">Dúvidas</a>
-        <a href="https://psimeta.rhpssystems.com.br/entrar">Entrar</a>
       </nav>
       <div class="topbar-acoes">
         <button type="button" class="tema-btn" aria-label="Usar tema escuro"><svg class="lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+        <a class="btn btn-ghost btn-small" href="https://psimeta.rhpssystems.com.br/entrar">Entrar</a>
         <a class="btn btn-primary btn-small" href="https://psimeta.rhpssystems.com.br/cadastro">Testar grátis</a>
       </div>
     </div>
