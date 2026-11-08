@@ -8,6 +8,7 @@
   <link rel="canonical" href="https://rhpssystems.com.br/psicologos/">
   <link rel="icon" href="../assets/logo.svg" type="image/svg+xml">
   <meta name="theme-color" content="#f6f7fb">
+  <script src="tema.js"></script>
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <meta property="og:site_name" content="RHPS Systems">
@@ -179,6 +180,43 @@
     .footer a { text-decoration: none; }
     .footer a:hover { color: var(--text); }
 
+    /* ===== Tema escuro (o tema.js põe data-tema no <html>) ===== */
+    html { color-scheme: light; }
+    html[data-tema="escuro"] {
+      color-scheme: dark;
+      --bg: #0e1120;
+      --surface: #171b2e;
+      --text: #e6e8f2;
+      --muted: #9ba3bd;
+      --border: #2a3049;
+      --primary: #7b7bf0;
+      --primary-dark: #6868e4;
+      --teal: #2dd4bf;
+      --soft: #23264b;
+      --green: #4ade80;
+    }
+    html[data-tema="escuro"] .topbar { background: rgba(14, 17, 32, .85); }
+    html[data-tema="escuro"] .btn-primary { color: #fff; box-shadow: 0 8px 24px rgba(0, 0, 0, .35); }
+    html[data-tema="escuro"] .app { box-shadow: 0 30px 60px rgba(0, 0, 0, .45); }
+    html[data-tema="escuro"] .tag.ok { background: rgba(74, 222, 128, .14); color: #86efac; }
+    html[data-tema="escuro"] .tag.wait { background: rgba(251, 191, 36, .14); color: #fcd34d; }
+    html[data-tema="escuro"] .tag.online { background: rgba(56, 189, 248, .14); color: #7dd3fc; }
+    html[data-tema="escuro"] .wa { background: var(--surface); box-shadow: 0 20px 40px rgba(0, 0, 0, .5); }
+    html[data-tema="escuro"] .wa p { background: rgba(74, 222, 128, .12); }
+    html[data-tema="escuro"] .wa p.me { background: #242a40; }
+    html[data-tema="escuro"] .plan.featured { box-shadow: 0 20px 40px rgba(0, 0, 0, .4); }
+    html[data-tema="escuro"] .plan.featured::before, html[data-tema="escuro"] .ciclo button[aria-pressed="true"] { color: #fff; }
+    html[data-tema="escuro"] .cta { background: linear-gradient(135deg, #4b4bc4, #6a4ee0 55%, #0f9f8f); }
+    html[data-tema="escuro"] .cta .btn { color: #4646b8; }
+
+    /* Botão de tema (lua / sol) */
+    .topbar-acoes { display: flex; align-items: center; gap: 10px; }
+    .tema-btn { width: 40px; height: 40px; border-radius: 12px; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; padding: 0; }
+    .tema-btn:hover { border-color: var(--primary); color: var(--primary); }
+    .tema-btn svg { width: 19px; height: 19px; }
+    .tema-btn .sol, html[data-tema="escuro"] .tema-btn .lua { display: none; }
+    html[data-tema="escuro"] .tema-btn .sol { display: block; }
+
     @media (max-width: 900px) {
       .hero-inner, .trust { grid-template-columns: 1fr; }
       .features, .pains { grid-template-columns: 1fr 1fr; }
@@ -208,7 +246,10 @@
         <a href="#duvidas">Dúvidas</a>
         <a href="https://psimeta.rhpssystems.com.br/entrar">Entrar</a>
       </nav>
-      <a class="btn btn-primary btn-small" href="https://psimeta.rhpssystems.com.br/cadastro">Testar grátis</a>
+      <div class="topbar-acoes">
+        <button type="button" class="tema-btn" aria-label="Usar tema escuro"><svg class="lua" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
+        <a class="btn btn-primary btn-small" href="https://psimeta.rhpssystems.com.br/cadastro">Testar grátis</a>
+      </div>
     </div>
   </header>
 

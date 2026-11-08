@@ -22,8 +22,19 @@ h3 { font-size: 1rem; margin: 20px 0 6px; }
 p, li { font-size: .98rem; }
 table { width: 100%; border-collapse: collapse; font-size: .92rem; margin: 10px 0; background: var(--surface); border-radius: 10px; overflow: hidden; }
 th, td { text-align: left; padding: 10px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
-th { background: #eef0ff; font-weight: 600; }
+th { background: var(--soft, #eef0ff); font-weight: 600; }
 .table-wrap { overflow-x: auto; }
 mark.fill { background: #fff3b0; padding: 0 4px; border-radius: 4px; }
 .foot { color: var(--muted); font-size: .9rem; border-top: 1px solid var(--border); padding-top: 20px; margin-top: 40px; }
 @media (max-width: 620px) { .toc ol { columns: 1; } .wrap { padding-top: 28px; } }
+
+/* Tema escuro (o tema.js põe data-tema no <html>) */
+html { color-scheme: light; }
+html[data-tema="escuro"] { color-scheme: dark; --bg: #0e1120; --surface: #171b2e; --text: #e6e8f2; --muted: #9ba3bd; --border: #2a3049; --primary: #8f8ff4; --soft: #23264b; }
+html[data-tema="escuro"] mark.fill { background: rgba(251, 191, 36, .25); color: inherit; }
+.top-acoes { display: flex; align-items: center; gap: 14px; }
+.tema-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: var(--surface); color: var(--text); display: grid; place-items: center; cursor: pointer; padding: 0; }
+.tema-btn:hover { border-color: var(--primary); color: var(--primary); }
+.tema-btn svg { width: 18px; height: 18px; }
+.tema-btn .sol, html[data-tema="escuro"] .tema-btn .lua { display: none; }
+html[data-tema="escuro"] .tema-btn .sol { display: block; }
