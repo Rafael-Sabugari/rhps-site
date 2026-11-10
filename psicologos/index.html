@@ -219,6 +219,11 @@
     /* Botão de tema (lua / sol) */
     .topbar-acoes { display: flex; align-items: center; gap: 8px; }
     .topbar-acoes .btn-small { white-space: nowrap; }
+    /* Prints reais do app no topo */
+    .mock-real { max-width: 400px; margin-left: auto; }
+    .tela-real { width: 100%; height: auto; border-radius: 26px; border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(23, 32, 54, .14); }
+    .cartao-real { position: absolute; left: -56px; bottom: -36px; width: 66%; height: auto; border-radius: 18px; box-shadow: 0 24px 50px rgba(70, 60, 200, .35); }
+    @media (max-width: 900px) { .mock-real { margin: 0 auto 40px; max-width: 340px; } .cartao-real { left: -18px; width: 62%; } }
     /* Vídeo de demonstração */
     .video-wrap { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 56px; align-items: center; }
     .video-frame video { display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: 28px; background: #1a1a4f; box-shadow: 0 24px 60px rgba(40, 36, 140, .25); }
@@ -300,22 +305,9 @@
           </ul>
         </div>
 
-        <div class="mock" aria-hidden="true">
-          <div class="app">
-            <div class="app-bar"><strong>Agenda de hoje</strong><small>Terça, 10 de novembro</small></div>
-            <div class="slots">
-              <div class="slot"><time>08:00</time><div><b>Mariana S.</b><span>Sessão semanal · 6ª de 12</span></div><i class="tag ok">Confirmou</i></div>
-              <div class="slot on"><time>09:00</time><div><b>Pedro A.</b><span>Primeira consulta</span></div><i class="tag online">Online</i></div>
-              <div class="slot"><time>10:30</time><div><b>Juliana M.</b><span>Sessão quinzenal</span></div><i class="tag ok">Confirmou</i></div>
-              <div class="slot"><time>14:00</time><div><b>Carlos R.</b><span>Sessão semanal</span></div><i class="tag wait">Aguardando</i></div>
-              <div class="slot"><time>15:00</time><div><b>Fernanda L.</b><span>Retorno</span></div><i class="tag ok">Confirmou</i></div>
-            </div>
-          </div>
-          <div class="wa">
-            <div class="wa-head"><i>✓</i> Lembrete pronto</div>
-            <p>Oi, Carlos! Lembrando da sua sessão amanhã às 14h. Responda 1 para confirmar ou 2 para remarcar.</p>
-            <p class="me">1</p>
-          </div>
+        <div class="mock mock-real">
+          <img class="tela-real" src="/assets/psimeta-agenda.jpg" width="630" height="960" alt="Agenda do dia no Psimeta, com as sessões de hoje e quem confirmou">
+          <img class="cartao-real" src="/assets/psimeta-resumo.jpg" width="623" height="454" alt="" aria-hidden="true">
         </div>
       </div>
     </section>
