@@ -219,6 +219,23 @@
     /* Botão de tema (lua / sol) */
     .topbar-acoes { display: flex; align-items: center; gap: 8px; }
     .topbar-acoes .btn-small { white-space: nowrap; }
+    /* Prints reais do app no topo */
+    .mock-real { max-width: 400px; margin-left: auto; }
+    .tela-real { width: 100%; height: auto; border-radius: 26px; border: 1px solid var(--border); box-shadow: 0 30px 60px rgba(23, 32, 54, .14); }
+    .cartao-real { position: absolute; left: -56px; bottom: -36px; width: 66%; height: auto; border-radius: 18px; box-shadow: 0 24px 50px rgba(70, 60, 200, .35); }
+    @media (max-width: 900px) { .mock-real { margin: 0 auto 40px; max-width: 340px; } .cartao-real { left: -18px; width: 62%; } }
+    /* Vídeo de demonstração */
+    .video-wrap { display: grid; grid-template-columns: minmax(0, 340px) 1fr; gap: 56px; align-items: center; }
+    .video-frame video { display: block; width: 100%; aspect-ratio: 9 / 16; border-radius: 28px; background: #1a1a4f; box-shadow: 0 24px 60px rgba(40, 36, 140, .25); }
+    .capitulos { list-style: none; padding: 0; margin: 8px 0 28px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .capitulos button { width: 100%; display: flex; align-items: center; gap: 10px; text-align: left; font: inherit; font-weight: 600; color: var(--text); background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 10px 14px; cursor: pointer; transition: border-color .2s, background .2s; }
+    .capitulos button:hover, .capitulos button.on { border-color: var(--primary); background: var(--soft); }
+    .capitulos time { font-size: .8rem; font-weight: 600; color: var(--primary); background: var(--soft); border-radius: 999px; padding: 2px 8px; flex: none; }
+    @media (max-width: 900px) {
+      .video-wrap { grid-template-columns: 1fr; gap: 32px; }
+      .video-frame { max-width: 320px; margin: 0 auto; width: 100%; }
+    }
+    @media (max-width: 420px) { .capitulos { grid-template-columns: 1fr; } }
     @media (max-width: 420px) { .topbar-acoes { gap: 6px; } .topbar-acoes .btn-small { padding: 9px 11px; font-size: .86rem; } .tema-btn { width: 36px; height: 36px; } }
     @media (max-width: 370px) { .brand span { display: none; } }
     .hero-inner > * { min-width: 0; }
@@ -279,7 +296,7 @@
           <p class="lead">Agenda online, prontuário seguro, lembretes no WhatsApp e controle de pagamentos em um só lugar. Feito para quem atende sozinho ou em consultório pequeno.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="https://psimeta.rhpssystems.com.br/cadastro">Começar teste grátis</a>
-            <a class="btn btn-ghost" href="#recursos">Ver os recursos <span aria-hidden="true">→</span></a>
+            <a class="btn btn-ghost" href="#video">Ver o vídeo (50s) <span aria-hidden="true">▶</span></a>
           </div>
           <ul class="hero-points">
             <li>Sem instalar nada</li>
@@ -288,22 +305,9 @@
           </ul>
         </div>
 
-        <div class="mock" aria-hidden="true">
-          <div class="app">
-            <div class="app-bar"><strong>Agenda de hoje</strong><small>Terça, 10 de novembro</small></div>
-            <div class="slots">
-              <div class="slot"><time>08:00</time><div><b>Mariana S.</b><span>Sessão semanal · 6ª de 12</span></div><i class="tag ok">Confirmou</i></div>
-              <div class="slot on"><time>09:00</time><div><b>Pedro A.</b><span>Primeira consulta</span></div><i class="tag online">Online</i></div>
-              <div class="slot"><time>10:30</time><div><b>Juliana M.</b><span>Sessão quinzenal</span></div><i class="tag ok">Confirmou</i></div>
-              <div class="slot"><time>14:00</time><div><b>Carlos R.</b><span>Sessão semanal</span></div><i class="tag wait">Aguardando</i></div>
-              <div class="slot"><time>15:00</time><div><b>Fernanda L.</b><span>Retorno</span></div><i class="tag ok">Confirmou</i></div>
-            </div>
-          </div>
-          <div class="wa">
-            <div class="wa-head"><i>✓</i> Lembrete pronto</div>
-            <p>Oi, Carlos! Lembrando da sua sessão amanhã às 14h. Responda 1 para confirmar ou 2 para remarcar.</p>
-            <p class="me">1</p>
-          </div>
+        <div class="mock mock-real">
+          <img class="tela-real" src="/assets/psimeta-agenda.jpg" width="630" height="960" alt="Agenda do dia no Psimeta, com as sessões de hoje e quem confirmou">
+          <img class="cartao-real" src="/assets/psimeta-resumo.jpg" width="623" height="454" alt="" aria-hidden="true">
         </div>
       </div>
     </section>
@@ -321,6 +325,46 @@
         </div>
       </div>
     </section>
+
+    <section class="section" id="video" aria-labelledby="vid" style="padding-top:8px">
+      <div class="container video-wrap">
+        <div class="video-frame">
+          <video id="demo" src="/assets/video/psimeta-demo.mp4" poster="/assets/video/psimeta-demo-capa.jpg" controls playsinline preload="metadata" aria-label="Demonstração do Psimeta"></video>
+        </div>
+        <div>
+          <span class="eyebrow">Veja funcionando</span>
+          <h2 id="vid">O Psimeta de verdade, em 50 segundos</h2>
+          <p style="color:var(--muted)">Telas reais do app, gravadas no celular. Toque num item para ir direto a ele.</p>
+          <ol class="capitulos">
+            <li><button type="button" data-t="6.3"><time>0:06</time>Agenda do dia</button></li>
+            <li><button type="button" data-t="10.3"><time>0:10</time>Paciente marca pelo link</button></li>
+            <li><button type="button" data-t="16.3"><time>0:16</time>Prontuário com IA</button></li>
+            <li><button type="button" data-t="24.3"><time>0:24</time>PHQ-9 e GAD-7 por link</button></li>
+            <li><button type="button" data-t="30.3"><time>0:30</time>Pontuação e evolução</button></li>
+            <li><button type="button" data-t="34.3"><time>0:34</time>Pacotes de sessões</button></li>
+            <li><button type="button" data-t="40.3"><time>0:40</time>Financeiro</button></li>
+          </ol>
+          <a class="btn btn-primary" href="https://psimeta.rhpssystems.com.br/cadastro">Começar teste grátis</a>
+        </div>
+      </div>
+    </section>
+    <script>
+      (function () {
+        var v = document.getElementById('demo');
+        var bs = document.querySelectorAll('.capitulos button');
+        bs.forEach(function (b) {
+          b.addEventListener('click', function () {
+            v.currentTime = Number(b.dataset.t);
+            var p = v.play(); if (p && p.catch) p.catch(function () {});
+          });
+        });
+        v.addEventListener('timeupdate', function () {
+          var atual = null;
+          bs.forEach(function (b) { if (v.currentTime >= Number(b.dataset.t)) atual = b; });
+          bs.forEach(function (b) { b.classList.toggle('on', b === atual); });
+        });
+      })();
+    </script>
 
     <section class="section alt" id="recursos" aria-labelledby="rec">
       <div class="container">
